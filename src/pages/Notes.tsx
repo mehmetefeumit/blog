@@ -1,14 +1,17 @@
 import { useSeoMeta } from '@unhead/react';
+import { useCurrentUser } from '@/hooks/useCurrentUser';
 import { useBlogPosts } from '@/hooks/useBlogPosts';
 import { BlogPost } from '@/components/BlogPost';
+import { CreateNote } from '@/components/CreateNote';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Card, CardContent } from '@/components/ui/card';
-
-// Your npub converted to hex
-const AUTHOR_PUBKEY = 'f9cc6b4b5a4881e20e7588fd520a630d95a8f147f15c5e8610dc0ff62bb29c30';
+import { AUTHOR_PUBKEY } from '@/lib/constants';
 
 const Notes = () => {
+  const { user } = useCurrentUser();
   const { data: posts, isLoading, error } = useBlogPosts(AUTHOR_PUBKEY);
+
+  const isAuthor = user?.pubkey === AUTHOR_PUBKEY;
 
   useSeoMeta({
     title: 'Notes',
@@ -26,6 +29,14 @@ const Notes = () => {
       </div>
 
       <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+
+      {/* Create Note Form (only for author) */}
+      {isAuthor && (
+        <>
+          <CreateNote />
+          <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+        </>
+      )}
 
       {/* Loading State */}
       {isLoading && (

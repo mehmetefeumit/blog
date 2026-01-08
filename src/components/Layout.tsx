@@ -2,9 +2,8 @@ import { Link, useLocation } from 'react-router-dom';
 import { useAuthor } from '@/hooks/useAuthor';
 import { genUserName } from '@/lib/genUserName';
 import { cn } from '@/lib/utils';
-
-// Your npub converted to hex
-const AUTHOR_PUBKEY = 'f9cc6b4b5a4881e20e7588fd520a630d95a8f147f15c5e8610dc0ff62bb29c30';
+import { AUTHOR_PUBKEY } from '@/lib/constants';
+import { AuthorLogin } from '@/components/AuthorLogin';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -97,18 +96,15 @@ export function Layout({ children }: LayoutProps) {
       {/* Footer */}
       <footer className="border-t border-border/40 mt-20">
         <div className="container max-w-4xl mx-auto px-4 py-8">
-          <div className="flex items-center justify-between text-xs text-muted-foreground">
-            <p className="font-mono">
-              Powered by <span className="text-primary">Nostr</span>
-            </p>
-            <a
-              href="https://shakespeare.diy"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-primary transition-colors font-mono"
-            >
-              Vibed with Shakespeare
-            </a>
+          <div className="flex items-start justify-between gap-8">
+            <div className="flex-1">
+              <p className="text-xs text-muted-foreground font-mono">
+                Powered by <span className="text-primary">Nostr</span>
+              </p>
+            </div>
+            <div className="w-64">
+              <AuthorLogin />
+            </div>
           </div>
         </div>
       </footer>

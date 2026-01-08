@@ -3,9 +3,7 @@ import { useAuthor } from '@/hooks/useAuthor';
 import { Card, CardContent } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { genUserName } from '@/lib/genUserName';
-
-// Your npub converted to hex
-const AUTHOR_PUBKEY = 'f9cc6b4b5a4881e20e7588fd520a630d95a8f147f15c5e8610dc0ff62bb29c30';
+import { AUTHOR_PUBKEY } from '@/lib/constants';
 
 const About = () => {
   const author = useAuthor(AUTHOR_PUBKEY);
