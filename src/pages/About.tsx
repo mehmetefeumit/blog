@@ -85,51 +85,34 @@ const About = () => {
         </CardContent>
       </Card>
 
-      {/* What is this page section */}
+      {/* How this page works section */}
       <Card className="border-border/40 bg-card/50 backdrop-blur-sm">
         <CardContent className="pt-6 pb-6">
           <div className="prose prose-neutral dark:prose-invert max-w-none">
             <div className="space-y-6">
               <section>
-                <h2 className="text-2xl font-bold mb-4">What is this page?</h2>
+                <h2 className="text-2xl font-bold mb-4">How this page works</h2>
                 <p className="text-foreground/90 leading-relaxed">
-                  This website is powered by <span className="font-semibold text-primary">Nostr</span> (Notes and Other Stuff
-                  Transmitted by Relays)—a decentralized protocol for publishing and distributing content. Unlike traditional
-                  websites that store content on centralized servers, this site fetches content directly from a network of
-                  relay servers using cryptographic signatures.
+                  All blog posts and other writings which you will see on this page are published to a distributed collection
+                  of relays using the Nostr protocol. Unlike alternatives like Substack or Bear Blog, which store writings in
+                  centralized servers where they can be tampered with or deleted, Nostr guarantees that (1) all content which
+                  is under my "name" (public key) has been signed by my private key which only I have access to, and (2) the
+                  hosting of the content is made redundant by publishing to a decentralized collection of relays.
                 </p>
-              </section>
-
-              <section>
-                <h3 className="text-xl font-bold mb-3">What's happening in your browser?</h3>
-                <div className="space-y-3 text-foreground/90">
-                  <p>When you visit this page, your browser:</p>
-                  <ol className="list-decimal list-inside space-y-3 ml-4">
-                    <li>
-                      <span className="font-semibold">Connects to relay servers</span> — Instead of a single server,
-                      it connects to multiple independent relay servers:
-                      <ul className="list-disc list-inside ml-6 mt-2 space-y-1 text-sm">
-                        {config.relayMetadata.relays.map((relay) => (
-                          <li key={relay.url}>
-                            <code className="text-xs text-primary">{relay.url}</code>
-                          </li>
-                        ))}
-                      </ul>
-                    </li>
-                    <li>
-                      <span className="font-semibold">Requests my content</span> — It asks for all events signed by my
-                      public key (<span className="font-mono text-xs text-primary break-all">{AUTHOR_NPUB}</span>).
-                    </li>
-                    <li>
-                      <span className="font-semibold">Verifies cryptographic signatures</span> — Each post is cryptographically
-                      signed with my private key, proving I'm the author and the content hasn't been tampered with.
-                    </li>
-                    <li>
-                      <span className="font-semibold">Displays the content</span> — Once verified, it renders the posts you see.
-                      No middleman can censor, modify, or delete them.
-                    </li>
-                  </ol>
-                </div>
+                <p className="text-foreground/90 leading-relaxed mt-4">
+                  When you visit this page, your browser connects to multiple independent relays, and requests all content
+                  under my public key. In contrast to standard clients like{' '}
+                  <a
+                    href="https://primal.net/home"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary hover:underline"
+                  >
+                    Primal
+                  </a>
+                  , it will only display content under my public key, essentially making this page a personal blog where the
+                  content is not hosted by me but instead independent relays.
+                </p>
               </section>
 
               <section className="pt-4 border-t border-border/40">
