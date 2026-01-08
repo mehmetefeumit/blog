@@ -1,12 +1,17 @@
 import { useSeoMeta } from '@unhead/react';
 import { useAuthor } from '@/hooks/useAuthor';
+import { useAppContext } from '@/hooks/useAppContext';
 import { Card, CardContent } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { genUserName } from '@/lib/genUserName';
 import { AUTHOR_PUBKEY } from '@/lib/constants';
+import { nip19 } from 'nostr-tools';
+
+const AUTHOR_NPUB = 'npub17pdf8saz8fflz3dqyst8rhfzav4s922yv0truw85nr02jxyxqr3shkl0gr';
 
 const About = () => {
   const author = useAuthor(AUTHOR_PUBKEY);
+  const { config } = useAppContext();
 
   const displayName = author.data?.metadata?.display_name ||
                       author.data?.metadata?.name ||
@@ -99,14 +104,21 @@ const About = () => {
                 <h3 className="text-xl font-bold mb-3">What's happening in your browser?</h3>
                 <div className="space-y-3 text-foreground/90">
                   <p>When you visit this page, your browser:</p>
-                  <ol className="list-decimal list-inside space-y-2 ml-4">
+                  <ol className="list-decimal list-inside space-y-3 ml-4">
                     <li>
                       <span className="font-semibold">Connects to relay servers</span> — Instead of a single server,
-                      it connects to multiple independent relay servers that store Nostr events.
+                      it connects to multiple independent relay servers:
+                      <ul className="list-disc list-inside ml-6 mt-2 space-y-1 text-sm">
+                        {config.relayMetadata.relays.map((relay) => (
+                          <li key={relay.url}>
+                            <code className="text-xs text-primary">{relay.url}</code>
+                          </li>
+                        ))}
+                      </ul>
                     </li>
                     <li>
                       <span className="font-semibold">Requests my content</span> — It asks for all events signed by my
-                      public key (<span className="font-mono text-xs text-primary break-all">{AUTHOR_PUBKEY.slice(0, 16)}...</span>).
+                      public key (<span className="font-mono text-xs text-primary break-all">{AUTHOR_NPUB}</span>).
                     </li>
                     <li>
                       <span className="font-semibold">Verifies cryptographic signatures</span> — Each post is cryptographically
@@ -117,94 +129,6 @@ const About = () => {
                       No middleman can censor, modify, or delete them.
                     </li>
                   </ol>
-                </div>
-              </section>
-
-              <section>
-                <h3 className="text-xl font-bold mb-3">Why does this matter?</h3>
-                <ul className="space-y-2 text-foreground/90">
-                  <li className="flex items-start gap-2">
-                    <span className="text-primary font-bold mt-1">•</span>
-                    <span><span className="font-semibold">Censorship-resistant:</span> No single entity can remove or alter my content.</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-primary font-bold mt-1">•</span>
-                    <span><span className="font-semibold">True ownership:</span> I control my identity and content with cryptographic keys, not usernames/passwords.</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-primary font-bold mt-1">•</span>
-                    <span><span className="font-semibold">Portable:</span> My content exists across multiple relays—if one goes down, others still serve it.</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-primary font-bold mt-1">•</span>
-                    <span><span className="font-semibold">Open protocol:</span> Anyone can build clients, relays, or websites using Nostr. No platform lock-in.</span>
-                  </li>
-                </ul>
-              </section>
-
-              <section>
-                <h3 className="text-xl font-bold mb-3">Learn more about Nostr</h3>
-                <div className="space-y-2">
-                  <p className="text-foreground/90">
-                    Interested in learning more about the Nostr protocol and how it works?
-                  </p>
-                  <ul className="space-y-2 text-foreground/90">
-                    <li>
-                      <a
-                        href="https://nostr.com"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-primary hover:underline font-medium"
-                      >
-                        nostr.com
-                      </a>
-                      {' '}— Introduction and getting started guide
-                    </li>
-                    <li>
-                      <a
-                        href="https://nostr.how"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-primary hover:underline font-medium"
-                      >
-                        nostr.how
-                      </a>
-                      {' '}— Comprehensive guides and tutorials
-                    </li>
-                    <li>
-                      <a
-                        href="https://github.com/nostr-protocol/nostr"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-primary hover:underline font-medium"
-                      >
-                        Protocol Specification
-                      </a>
-                      {' '}— Technical documentation on GitHub
-                    </li>
-                    <li>
-                      <a
-                        href="https://github.com/nostr-protocol/nips"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-primary hover:underline font-medium"
-                      >
-                        NIPs (Nostr Implementation Possibilities)
-                      </a>
-                      {' '}— Protocol extensions and standards
-                    </li>
-                    <li>
-                      <a
-                        href="https://nostr.band"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-primary hover:underline font-medium"
-                      >
-                        nostr.band
-                      </a>
-                      {' '}— Search and explore Nostr content
-                    </li>
-                  </ul>
                 </div>
               </section>
 

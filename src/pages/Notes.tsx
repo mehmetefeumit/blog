@@ -25,8 +25,6 @@ const Notes = () => {
         <h1 className="text-3xl font-bold mb-2">Notes</h1>
         <p className="text-muted-foreground">
           Short-form posts published as <span className="font-mono text-primary">NIP-01</span> events.
-          Similar to tweets, but cryptographically signed and distributed across relay servers—no central authority can ban,
-          shadowban, or algorithmic-filter these posts. You own your audience, not a corporation.
         </p>
       </div>
 

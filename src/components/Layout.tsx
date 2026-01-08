@@ -4,6 +4,7 @@ import { genUserName } from '@/lib/genUserName';
 import { cn } from '@/lib/utils';
 import { AUTHOR_PUBKEY } from '@/lib/constants';
 import { AuthorLogin } from '@/components/AuthorLogin';
+import { Nip05Badge } from '@/components/Nip05Badge';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -31,10 +32,13 @@ export function Layout({ children }: LayoutProps) {
         <div className="container max-w-4xl mx-auto px-4 py-6">
           <div className="flex items-center justify-between mb-6">
             <Link to="/" className="group">
-              <h1 className="text-2xl font-bold tracking-tight text-foreground group-hover:text-primary transition-colors">
-                <span className="font-mono text-primary">/</span>
-                {displayName}
-              </h1>
+              <div className="space-y-1">
+                <h1 className="text-2xl font-bold tracking-tight text-foreground group-hover:text-primary transition-colors">
+                  <span className="font-mono text-primary">/</span>
+                  <span className="ml-1">{displayName}</span>
+                </h1>
+                <Nip05Badge nip05="efe@nostrpurple.com" pubkey={AUTHOR_PUBKEY} />
+              </div>
             </Link>
           </div>
 
