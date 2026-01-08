@@ -15,7 +15,7 @@ export function Nip05Badge({ nip05, pubkey }: Nip05BadgeProps) {
       try {
         // Split the identifier into local-part and domain
         const [localPart, domain] = nip05.split('@');
-        
+
         if (!localPart || !domain) {
           setIsVerified(false);
           setIsLoading(false);
@@ -25,7 +25,7 @@ export function Nip05Badge({ nip05, pubkey }: Nip05BadgeProps) {
         // Fetch the well-known URL
         const url = `https://${domain}/.well-known/nostr.json?name=${localPart}`;
         const response = await fetch(url);
-        
+
         if (!response.ok) {
           setIsVerified(false);
           setIsLoading(false);
@@ -33,7 +33,7 @@ export function Nip05Badge({ nip05, pubkey }: Nip05BadgeProps) {
         }
 
         const data = await response.json();
-        
+
         // Check if the pubkey matches
         const verified = data.names?.[localPart]?.toLowerCase() === pubkey.toLowerCase();
         setIsVerified(verified);
@@ -50,7 +50,7 @@ export function Nip05Badge({ nip05, pubkey }: Nip05BadgeProps) {
 
   if (isLoading) {
     return (
-      <span className="inline-flex items-center gap-1 text-muted-foreground text-sm">
+      <span className="flex items-center gap-1 text-muted-foreground text-sm">
         <Loader2 className="h-3 w-3 animate-spin" />
         <span className="font-mono">{nip05}</span>
       </span>
@@ -63,7 +63,7 @@ export function Nip05Badge({ nip05, pubkey }: Nip05BadgeProps) {
         href={`https://${nip05.split('@')[1]}/.well-known/nostr.json?name=${nip05.split('@')[0]}`}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center gap-1 text-primary hover:underline text-sm group"
+        className="flex items-center gap-1 text-primary hover:underline text-sm group"
         title="Click to verify NIP-05 address"
       >
         <CheckCircle2 className="h-3 w-3 shrink-0" />
@@ -73,7 +73,7 @@ export function Nip05Badge({ nip05, pubkey }: Nip05BadgeProps) {
   }
 
   return (
-    <span className="inline-flex items-center gap-1 text-destructive text-sm" title="NIP-05 verification failed">
+    <span className="flex items-center gap-1 text-destructive text-sm" title="NIP-05 verification failed">
       <XCircle className="h-3 w-3 shrink-0" />
       <span className="font-mono">{nip05}</span>
     </span>
