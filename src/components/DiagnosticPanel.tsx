@@ -122,11 +122,18 @@ export function DiagnosticPanel() {
   };
 
   return (
-    <div className="flex items-start gap-3 text-xs flex-wrap">
-      {/* Public Key */}
+    <div className="flex items-start gap-4 text-xs flex-wrap">
+      {/* Public Key - Full npub with link */}
       <div className="flex items-center gap-1.5">
         <span className="text-muted-foreground text-xs">npub:</span>
-        <code className="text-primary text-xs">{AUTHOR_NPUB.slice(0, 16)}...</code>
+        <a
+          href={`https://njump.me/${AUTHOR_NPUB}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-primary text-xs hover:underline font-mono"
+        >
+          {AUTHOR_NPUB}
+        </a>
       </div>
 
       {/* Relay Status - Horizontal */}
@@ -135,7 +142,7 @@ export function DiagnosticPanel() {
         {relayStatuses.map((relay, index) => (
           <div key={relay.url} className="flex items-center gap-1">
             <code className="text-xs text-muted-foreground">
-              {relay.url.replace('wss://', '')}
+              {relay.url.replace('wss://', '').replace(/\/$/, '')}
             </code>
             <span className={`text-xs font-mono ${
               relay.status === 'connected' ? 'text-primary' : 'text-destructive'

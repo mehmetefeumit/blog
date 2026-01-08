@@ -33,7 +33,7 @@ export function Layout({ children }: LayoutProps) {
       {/* Header */}
       <header className="border-b border-border/40 backdrop-blur-sm bg-background/80 sticky top-0 z-10">
         <div className="container max-w-6xl mx-auto px-4 py-6">
-          <div className="flex items-start justify-between gap-6 mb-4">
+          <div className="flex items-start justify-between gap-12 mb-4">
             <Link to="/" className="group shrink-0">
               <div className="space-y-1">
                 <h1 className={`text-2xl font-bold tracking-tight transition-colors ${
