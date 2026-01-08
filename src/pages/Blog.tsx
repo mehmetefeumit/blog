@@ -24,7 +24,9 @@ const Blog = () => {
       <div>
         <h1 className="text-3xl font-bold mb-2">Blog</h1>
         <p className="text-muted-foreground">
-          Long-form essays and in-depth writing
+          Long-form articles published as <span className="font-mono text-primary">NIP-23</span> events.
+          Unlike traditional blog posts, these are cryptographically signed, uncensorable, and owned by me—not a platform.
+          They exist on the Nostr protocol, meaning no one can delete or modify them except me.
         </p>
       </div>
 
