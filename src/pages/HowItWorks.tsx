@@ -52,10 +52,22 @@ const HowItWorks = () => {
               </section>
 
               <section className="pt-6">
-                <h3 className="text-xl font-bold mb-3">{howItWorksContent.whyNotSelfHost.heading}</h3>
-                <p className="text-foreground/90 leading-relaxed">
-                  {howItWorksContent.whyNotSelfHost.content}
-                </p>
+                <h3 className="text-xl font-bold mb-4">{howItWorksContent.whyNotSelfHost.heading}</h3>
+                <div className="space-y-4">
+                  {howItWorksContent.whyNotSelfHost.paragraphs.map((paragraph, index) => (
+                    <p key={index} className="text-foreground/90 leading-relaxed">
+                      {paragraph}
+                    </p>
+                  ))}
+                  <ul className="space-y-3 mt-4">
+                    {howItWorksContent.whyNotSelfHost.bulletPoints.map((point, index) => (
+                      <li key={index} className="flex items-start gap-3">
+                        <span className="text-primary font-bold mt-1 shrink-0">•</span>
+                        <span className="text-foreground/90 leading-relaxed">{point}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </section>
 
               <section className="pt-4 border-t border-border/40">
