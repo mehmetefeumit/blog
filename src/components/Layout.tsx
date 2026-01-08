@@ -5,8 +5,10 @@ import { cn } from '@/lib/utils';
 import { AUTHOR_PUBKEY } from '@/lib/constants';
 import { AuthorLogin } from '@/components/AuthorLogin';
 import { Nip05Badge } from '@/components/Nip05Badge';
-import { DiagnosticPanel } from '@/components/DiagnosticPanel';
+import { NpubBadge } from '@/components/NpubBadge';
 import { RelayBanner } from '@/components/RelayBanner';
+
+const AUTHOR_NPUB = 'npub17pdf8saz8fflz3dqyst8rhfzav4s922yv0truw85nr02jxyxqr3shkl0gr';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -37,8 +39,8 @@ export function Layout({ children }: LayoutProps) {
       {/* Header */}
       <header className="border-b border-border/40 backdrop-blur-sm bg-background/80 sticky top-0 z-10">
         <div className="container max-w-6xl mx-auto px-4 py-6">
-          <div className="flex items-start justify-between gap-24 mb-4">
-            <Link to="/" className="group shrink-0">
+          <div className="mb-4">
+            <Link to="/" className="group inline-block">
               <div className="space-y-1">
                 <h1 className={`text-2xl font-bold tracking-tight transition-colors ${
                   author.isLoading ? 'text-muted-foreground' : 'text-foreground group-hover:text-primary'
@@ -46,14 +48,10 @@ export function Layout({ children }: LayoutProps) {
                   <span className="font-mono text-primary">/</span>
                   <span className="ml-1">{displayName}</span>
                 </h1>
+                <NpubBadge npub={AUTHOR_NPUB} />
                 <Nip05Badge nip05="efe@nostrpurple.com" pubkey={AUTHOR_PUBKEY} />
               </div>
             </Link>
-
-            {/* Diagnostic Panel */}
-            <div className="flex-1 min-w-0 pt-1">
-              <DiagnosticPanel />
-            </div>
           </div>
 
           {/* Navigation */}
