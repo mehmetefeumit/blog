@@ -32,11 +32,11 @@ export function Layout({ children }: LayoutProps) {
     <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="border-b border-border/40 backdrop-blur-sm bg-background/80 sticky top-0 z-10">
-        <div className="container max-w-7xl mx-auto px-4 py-6">
-          <div className="space-y-3">
-            {/* Title and Diagnostic Panel */}
-            <div className="flex items-start justify-between gap-4">
-              <Link to="/" className="group">
+        <div className="container max-w-6xl mx-auto px-4 py-6">
+          <div className="space-y-4">
+            {/* Title Row */}
+            <div className="flex items-start gap-6">
+              <Link to="/" className="group shrink-0">
                 <div className="space-y-1">
                   <h1 className={`text-2xl font-bold tracking-tight transition-colors ${
                     author.isLoading ? 'text-muted-foreground' : 'text-foreground group-hover:text-primary'
@@ -49,7 +49,7 @@ export function Layout({ children }: LayoutProps) {
               </Link>
 
               {/* Diagnostic Panel */}
-              <div className="flex-1 min-w-0">
+              <div className="flex-1 min-w-0 pt-1">
                 <DiagnosticPanel />
               </div>
             </div>
@@ -116,16 +116,13 @@ export function Layout({ children }: LayoutProps) {
       </header>
 
       {/* Main Content */}
-      <main className="container max-w-7xl mx-auto px-4 py-12">
-        <div className="max-w-4xl">
-          {children}
-        </div>
+      <main className="container max-w-6xl mx-auto px-4 py-12">
+        {children}
       </main>
 
       {/* Footer */}
       <footer className="border-t border-border/40 mt-20">
-        <div className="container max-w-7xl mx-auto px-4 py-8">
-          <div className="max-w-4xl">
+        <div className="container max-w-6xl mx-auto px-4 py-8">
           <div className="space-y-4">
             <div className="flex items-center justify-between gap-8">
               <div className="flex-1 space-y-2">
@@ -145,7 +142,6 @@ export function Layout({ children }: LayoutProps) {
                 <AuthorLogin />
               </div>
             </div>
-          </div>
           </div>
         </div>
       </footer>

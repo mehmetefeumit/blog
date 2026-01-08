@@ -98,13 +98,14 @@ export function DiagnosticPanel() {
   // Listen to global diagnostic events
   useEffect(() => {
     const handleDiagnostic = (event: CustomEvent) => {
+      console.log('Diagnostic event received:', event.detail);
       addLog(event.detail.message, event.detail.type || 'info');
     };
 
     window.addEventListener('nostr-diagnostic' as any, handleDiagnostic);
 
     // Add initial log
-    addLog('Diagnostic panel initialized', 'success');
+    addLog('Panel ready', 'success');
 
     return () => {
       window.removeEventListener('nostr-diagnostic' as any, handleDiagnostic);
@@ -121,43 +122,43 @@ export function DiagnosticPanel() {
   };
 
   return (
-    <div className="flex items-start gap-4 text-xs">
+    <div className="flex items-start gap-3 text-xs flex-wrap">
       {/* Public Key */}
-      <div className="flex items-center gap-1.5 shrink-0">
-        <span className="text-muted-foreground">npub:</span>
-        <code className="text-primary text-[11px]">{AUTHOR_NPUB.slice(0, 16)}...</code>
+      <div className="flex items-center gap-1.5">
+        <span className="text-muted-foreground text-xs">npub:</span>
+        <code className="text-primary text-xs">{AUTHOR_NPUB.slice(0, 16)}...</code>
       </div>
 
       {/* Relay Status - Horizontal */}
-      <div className="flex items-center gap-2 shrink-0">
+      <div className="flex items-center gap-2">
         <Wifi className="h-3 w-3 text-muted-foreground" />
         {relayStatuses.map((relay, index) => (
           <div key={relay.url} className="flex items-center gap-1">
-            <code className="text-[11px] text-muted-foreground">
-              {relay.url.replace('wss://', '').split('.')[0]}
+            <code className="text-xs text-muted-foreground">
+              {relay.url.replace('wss://', '')}
             </code>
-            <span className={`text-[11px] font-mono ${
+            <span className={`text-xs font-mono ${
               relay.status === 'connected' ? 'text-primary' : 'text-destructive'
             }`}>
               {relay.latency !== null ? `${relay.latency}ms` :
                relay.status === 'connecting' ? '...' : 'x'}
             </span>
             {index < relayStatuses.length - 1 && (
-              <span className="text-muted-foreground/30">|</span>
+              <span className="text-muted-foreground/30 mx-1">|</span>
             )}
           </div>
         ))}
       </div>
 
       {/* Activity Logs - Single line with latest */}
-      <div className="flex items-center gap-2 min-w-0 flex-1">
-        <span className="text-muted-foreground shrink-0">Activity:</span>
-        {logs.length > 0 && (
+      <div className="flex items-center gap-2 min-w-0">
+        <span className="text-muted-foreground text-xs">Nostr Activity:</span>
+        {logs.length > 0 ? (
           <div className="flex items-center gap-1.5 min-w-0">
-            <span className="text-muted-foreground/70 font-mono shrink-0 text-[11px]">
+            <span className="text-muted-foreground/70 font-mono text-xs shrink-0">
               {formatTime(logs[0].timestamp).slice(0, 5)}
             </span>
-            <span className={`text-[11px] truncate ${
+            <span className={`text-xs truncate ${
               logs[0].type === 'error' ? 'text-destructive' :
               logs[0].type === 'success' ? 'text-primary' :
               'text-foreground'
@@ -165,6 +166,8 @@ export function DiagnosticPanel() {
               {logs[0].message}
             </span>
           </div>
+        ) : (
+          <span className="text-muted-foreground/50 text-xs italic">waiting...</span>
         )}
       </div>
     </div>
@@ -173,8 +176,11 @@ export function DiagnosticPanel() {
 
 // Helper function to emit diagnostic events
 export function emitDiagnostic(message: string, type: 'info' | 'success' | 'error' = 'info') {
-  const event = new CustomEvent('nostr-diagnostic', {
-    detail: { message, type }
-  });
-  window.dispatchEvent(event);
+  // Use setTimeout to ensure event is emitted after component mounts
+  setTimeout(() => {
+    const event = new CustomEvent('nostr-diagnostic', {
+      detail: { message, type }
+    });
+    window.dispatchEvent(event);
+  }, 0);
 }
