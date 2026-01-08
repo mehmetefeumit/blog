@@ -121,61 +121,51 @@ export function DiagnosticPanel() {
   };
 
   return (
-    <div className="text-xs space-y-2">
+    <div className="flex items-start gap-4 text-xs">
       {/* Public Key */}
-      <div className="flex items-center gap-2">
-        <span className="text-muted-foreground text-[10px] shrink-0">npub:</span>
-        <code className="text-primary text-[9px] truncate">{AUTHOR_NPUB.slice(0, 20)}...</code>
+      <div className="flex items-center gap-1.5 shrink-0">
+        <span className="text-muted-foreground">npub:</span>
+        <code className="text-primary text-[11px]">{AUTHOR_NPUB.slice(0, 16)}...</code>
       </div>
 
-      {/* Relay Status - Compact horizontal layout */}
-      <div className="space-y-1">
-        <div className="text-muted-foreground text-[10px] flex items-center gap-1">
-          <Wifi className="h-2.5 w-2.5" />
-          Relays:
-        </div>
-        <div className="space-y-0.5">
-          {relayStatuses.map((relay) => (
-            <div key={relay.url} className="flex items-center justify-between gap-2">
-              <code className="text-[9px] text-muted-foreground truncate flex-1">
-                {relay.url.replace('wss://', '').slice(0, 20)}
-              </code>
-              <span className={`text-[9px] font-mono shrink-0 ${
-                relay.status === 'connected' ? 'text-primary' : 'text-destructive'
-              }`}>
-                {relay.latency !== null ? `${relay.latency}ms` :
-                 relay.status === 'connecting' ? '...' : 'err'}
-              </span>
-            </div>
-          ))}
-        </div>
+      {/* Relay Status - Horizontal */}
+      <div className="flex items-center gap-2 shrink-0">
+        <Wifi className="h-3 w-3 text-muted-foreground" />
+        {relayStatuses.map((relay, index) => (
+          <div key={relay.url} className="flex items-center gap-1">
+            <code className="text-[11px] text-muted-foreground">
+              {relay.url.replace('wss://', '').split('.')[0]}
+            </code>
+            <span className={`text-[11px] font-mono ${
+              relay.status === 'connected' ? 'text-primary' : 'text-destructive'
+            }`}>
+              {relay.latency !== null ? `${relay.latency}ms` :
+               relay.status === 'connecting' ? '...' : 'x'}
+            </span>
+            {index < relayStatuses.length - 1 && (
+              <span className="text-muted-foreground/30">|</span>
+            )}
+          </div>
+        ))}
       </div>
 
-      {/* Activity Logs - More compact */}
-      <div className="space-y-1">
-        <div className="text-muted-foreground text-[10px]">Nostr Activity:</div>
-        <div className="space-y-0.5">
-          {logs.length === 0 ? (
-            <div className="text-muted-foreground/50 text-[9px] italic">
-              No activity yet...
-            </div>
-          ) : (
-            logs.map((log) => (
-              <div key={log.id} className="flex items-start gap-1.5">
-                <span className="text-muted-foreground/70 text-[9px] font-mono shrink-0 w-12">
-                  {formatTime(log.timestamp).slice(0, 5)}
-                </span>
-                <span className={`text-[9px] leading-tight truncate ${
-                  log.type === 'error' ? 'text-destructive' :
-                  log.type === 'success' ? 'text-primary' :
-                  'text-foreground'
-                }`}>
-                  {log.message}
-                </span>
-              </div>
-            ))
-          )}
-        </div>
+      {/* Activity Logs - Single line with latest */}
+      <div className="flex items-center gap-2 min-w-0 flex-1">
+        <span className="text-muted-foreground shrink-0">Activity:</span>
+        {logs.length > 0 && (
+          <div className="flex items-center gap-1.5 min-w-0">
+            <span className="text-muted-foreground/70 font-mono shrink-0 text-[11px]">
+              {formatTime(logs[0].timestamp).slice(0, 5)}
+            </span>
+            <span className={`text-[11px] truncate ${
+              logs[0].type === 'error' ? 'text-destructive' :
+              logs[0].type === 'success' ? 'text-primary' :
+              'text-foreground'
+            }`}>
+              {logs[0].message}
+            </span>
+          </div>
+        )}
       </div>
     </div>
   );

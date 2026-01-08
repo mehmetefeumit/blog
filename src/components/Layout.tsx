@@ -32,28 +32,30 @@ export function Layout({ children }: LayoutProps) {
     <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="border-b border-border/40 backdrop-blur-sm bg-background/80 sticky top-0 z-10">
-        <div className="container max-w-7xl mx-auto px-4 py-4">
-          <div className="flex items-start justify-between gap-8 mb-4">
-            <Link to="/" className="group">
-              <div className="space-y-1">
-                <h1 className={`text-2xl font-bold tracking-tight transition-colors ${
-                  author.isLoading ? 'text-muted-foreground' : 'text-foreground group-hover:text-primary'
-                }`}>
-                  <span className="font-mono text-primary">/</span>
-                  <span className="ml-1">{displayName}</span>
-                </h1>
-                <Nip05Badge nip05="efe@nostrpurple.com" pubkey={AUTHOR_PUBKEY} />
+        <div className="container max-w-7xl mx-auto px-4 py-6">
+          <div className="space-y-3">
+            {/* Title and Diagnostic Panel */}
+            <div className="flex items-start justify-between gap-4">
+              <Link to="/" className="group">
+                <div className="space-y-1">
+                  <h1 className={`text-2xl font-bold tracking-tight transition-colors ${
+                    author.isLoading ? 'text-muted-foreground' : 'text-foreground group-hover:text-primary'
+                  }`}>
+                    <span className="font-mono text-primary">/</span>
+                    <span className="ml-1">{displayName}</span>
+                  </h1>
+                  <Nip05Badge nip05="efe@nostrpurple.com" pubkey={AUTHOR_PUBKEY} />
+                </div>
+              </Link>
+
+              {/* Diagnostic Panel */}
+              <div className="flex-1 min-w-0">
+                <DiagnosticPanel />
               </div>
-            </Link>
-
-            {/* Diagnostic Panel */}
-            <div className="w-64 shrink-0">
-              <DiagnosticPanel />
             </div>
-          </div>
 
-          {/* Navigation */}
-          <nav className="flex gap-1">
+            {/* Navigation */}
+            <nav className="flex gap-1">
             <Link
               to="/"
               className={cn(
