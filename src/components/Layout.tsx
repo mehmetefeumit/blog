@@ -40,20 +40,18 @@ export function Layout({ children }: LayoutProps) {
       <header className="border-b border-border/40 backdrop-blur-sm bg-background/80 sticky top-0 z-10">
         <div className="container max-w-6xl mx-auto px-4 py-6">
           <div className="mb-4">
-            <Link to="/" className="group block">
-              <div className="space-y-1">
-                <h1 className={`text-2xl font-bold tracking-tight transition-colors ${
-                  author.isLoading ? 'text-muted-foreground' : 'text-foreground group-hover:text-primary'
-                }`}>
-                  <span className="font-mono text-primary">/</span>
-                  <span className="ml-1">{displayName}</span>
-                </h1>
-                <div className="space-y-0.5">
-                  <Nip05Badge nip05="efe@nostrpurple.com" pubkey={AUTHOR_PUBKEY} />
-                  <NpubBadge npub={AUTHOR_NPUB} />
-                </div>
+            <div className="space-y-1">
+              <h1 className={`text-2xl font-bold tracking-tight ${
+                author.isLoading ? 'text-muted-foreground' : 'text-foreground'
+              }`}>
+                <span className="font-mono text-primary">/</span>
+                <span className="ml-1">{displayName}</span>
+              </h1>
+              <div className="space-y-0.5">
+                <Nip05Badge nip05="efe@nostrpurple.com" pubkey={AUTHOR_PUBKEY} />
+                <NpubBadge npub={AUTHOR_NPUB} />
               </div>
-            </Link>
+            </div>
           </div>
 
           {/* Navigation */}
