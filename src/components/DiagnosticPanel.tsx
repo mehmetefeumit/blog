@@ -1,10 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useAppContext } from '@/hooks/useAppContext';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Activity, Wifi } from 'lucide-react';
-import { AUTHOR_PUBKEY } from '@/lib/constants';
-import { nip19 } from 'nostr-tools';
+import { Wifi } from 'lucide-react';
 
 interface DiagnosticLog {
   id: string;
@@ -44,7 +40,7 @@ export function DiagnosticPanel() {
           try {
             const startTime = performance.now();
             const ws = new WebSocket(relay.url);
-            
+
             await new Promise<void>((resolve, reject) => {
               const timeout = setTimeout(() => {
                 ws.close();
@@ -106,7 +102,7 @@ export function DiagnosticPanel() {
     };
 
     window.addEventListener('nostr-diagnostic' as any, handleDiagnostic);
-    
+
     // Add initial log
     addLog('Diagnostic panel initialized', 'success');
 
@@ -116,85 +112,72 @@ export function DiagnosticPanel() {
   }, []);
 
   const formatTime = (date: Date) => {
-    return date.toLocaleTimeString('en-US', { 
-      hour12: false, 
-      hour: '2-digit', 
-      minute: '2-digit', 
-      second: '2-digit' 
+    return date.toLocaleTimeString('en-US', {
+      hour12: false,
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
     });
   };
 
   return (
-    <Card className="border-border/40 bg-card/95 backdrop-blur-sm">
-      <CardHeader className="pb-3">
-        <CardTitle className="text-sm font-mono flex items-center gap-2">
-          <Activity className="h-4 w-4 text-primary" />
-          Diagnostics
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="space-y-4 text-xs">
-        {/* Public Key */}
-        <div>
-          <div className="text-muted-foreground mb-1 font-semibold">Public Key:</div>
-          <code className="text-primary break-all text-[10px]">{AUTHOR_NPUB}</code>
-        </div>
+    <div className="text-xs space-y-2">
+      {/* Public Key */}
+      <div className="flex items-center gap-2">
+        <span className="text-muted-foreground text-[10px] shrink-0">npub:</span>
+        <code className="text-primary text-[9px] truncate">{AUTHOR_NPUB.slice(0, 20)}...</code>
+      </div>
 
-        {/* Relay Status */}
-        <div>
-          <div className="text-muted-foreground mb-2 font-semibold flex items-center gap-1">
-            <Wifi className="h-3 w-3" />
-            Relays:
-          </div>
-          <div className="space-y-2">
-            {relayStatuses.map((relay) => (
-              <div key={relay.url} className="space-y-1">
-                <div className="flex items-center justify-between gap-2">
-                  <code className="text-[10px] text-muted-foreground truncate flex-1">
-                    {relay.url.replace('wss://', '')}
-                  </code>
-                  <Badge 
-                    variant={relay.status === 'connected' ? 'default' : 'destructive'}
-                    className="h-5 text-[10px] font-mono"
-                  >
-                    {relay.latency !== null ? `${relay.latency}ms` : 
-                     relay.status === 'connecting' ? 'connecting...' : 'error'}
-                  </Badge>
-                </div>
-              </div>
-            ))}
-          </div>
+      {/* Relay Status - Compact horizontal layout */}
+      <div className="space-y-1">
+        <div className="text-muted-foreground text-[10px] flex items-center gap-1">
+          <Wifi className="h-2.5 w-2.5" />
+          Relays:
         </div>
+        <div className="space-y-0.5">
+          {relayStatuses.map((relay) => (
+            <div key={relay.url} className="flex items-center justify-between gap-2">
+              <code className="text-[9px] text-muted-foreground truncate flex-1">
+                {relay.url.replace('wss://', '').slice(0, 20)}
+              </code>
+              <span className={`text-[9px] font-mono shrink-0 ${
+                relay.status === 'connected' ? 'text-primary' : 'text-destructive'
+              }`}>
+                {relay.latency !== null ? `${relay.latency}ms` :
+                 relay.status === 'connecting' ? '...' : 'err'}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
 
-        {/* Activity Logs */}
-        <div>
-          <div className="text-muted-foreground mb-2 font-semibold">Activity:</div>
-          <div className="space-y-1.5">
-            {logs.length === 0 ? (
-              <div className="text-muted-foreground/50 text-[10px] italic">
-                No activity yet...
+      {/* Activity Logs - More compact */}
+      <div className="space-y-1">
+        <div className="text-muted-foreground text-[10px]">Nostr Activity:</div>
+        <div className="space-y-0.5">
+          {logs.length === 0 ? (
+            <div className="text-muted-foreground/50 text-[9px] italic">
+              No activity yet...
+            </div>
+          ) : (
+            logs.map((log) => (
+              <div key={log.id} className="flex items-start gap-1.5">
+                <span className="text-muted-foreground/70 text-[9px] font-mono shrink-0 w-12">
+                  {formatTime(log.timestamp).slice(0, 5)}
+                </span>
+                <span className={`text-[9px] leading-tight truncate ${
+                  log.type === 'error' ? 'text-destructive' :
+                  log.type === 'success' ? 'text-primary' :
+                  'text-foreground'
+                }`}>
+                  {log.message}
+                </span>
               </div>
-            ) : (
-              logs.map((log) => (
-                <div key={log.id} className="space-y-0.5">
-                  <div className="flex items-start gap-2">
-                    <span className="text-muted-foreground/70 text-[10px] font-mono shrink-0">
-                      {formatTime(log.timestamp)}
-                    </span>
-                    <span className={`text-[10px] leading-tight ${
-                      log.type === 'error' ? 'text-destructive' : 
-                      log.type === 'success' ? 'text-primary' : 
-                      'text-foreground'
-                    }`}>
-                      {log.message}
-                    </span>
-                  </div>
-                </div>
-              ))
-            )}
-          </div>
+            ))
+          )}
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }
 

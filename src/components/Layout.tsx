@@ -32,8 +32,8 @@ export function Layout({ children }: LayoutProps) {
     <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="border-b border-border/40 backdrop-blur-sm bg-background/80 sticky top-0 z-10">
-        <div className="container max-w-7xl mx-auto px-4 py-6">
-          <div className="flex items-start justify-between gap-8 mb-6">
+        <div className="container max-w-7xl mx-auto px-4 py-4">
+          <div className="flex items-start justify-between gap-8 mb-4">
             <Link to="/" className="group">
               <div className="space-y-1">
                 <h1 className={`text-2xl font-bold tracking-tight transition-colors ${
@@ -47,7 +47,7 @@ export function Layout({ children }: LayoutProps) {
             </Link>
 
             {/* Diagnostic Panel */}
-            <div className="w-80 shrink-0">
+            <div className="w-64 shrink-0">
               <DiagnosticPanel />
             </div>
           </div>
