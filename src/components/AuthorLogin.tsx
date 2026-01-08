@@ -1,11 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useCurrentUser } from '@/hooks/useCurrentUser';
 import { useLoginActions } from '@/hooks/useLoginActions';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
 import { AUTHOR_PUBKEY } from '@/lib/constants';
-import { LogIn, LogOut, AlertCircle } from 'lucide-react';
-import { Alert, AlertDescription } from '@/components/ui/alert';
 
 export function AuthorLogin() {
   const { user } = useCurrentUser();
@@ -43,74 +39,50 @@ export function AuthorLogin() {
   };
 
   return (
-    <Card className="border-border/40 bg-card/30 backdrop-blur-sm">
-      <CardContent className="pt-4 pb-4">
-        <div className="space-y-3">
-          {!user && (
-            <>
-              <p className="text-xs text-muted-foreground font-mono">
-                Author login (blog owner only)
-              </p>
-              <Button
-                onClick={handleLogin}
-                variant="outline"
-                size="sm"
-                className="w-full"
-                disabled={isLoggingIn}
-              >
-                <LogIn className="mr-2 h-4 w-4" />
-                {isLoggingIn ? 'Connecting...' : 'Login with Nostr Extension'}
-              </Button>
-            </>
-          )}
+    <div className="space-y-2">
+      {!user && (
+        <button
+          onClick={handleLogin}
+          disabled={isLoggingIn}
+          className="text-xs text-muted-foreground hover:text-primary transition-colors font-mono cursor-pointer disabled:opacity-50"
+        >
+          {isLoggingIn ? 'Connecting...' : 'Author login (blog owner only)'}
+        </button>
+      )}
 
-          {user && !isAuthor && (
-            <>
-              <Alert variant="destructive">
-                <AlertCircle className="h-4 w-4" />
-                <AlertDescription className="text-xs">
-                  Access denied: This login is only for the blog owner.
-                </AlertDescription>
-              </Alert>
-              <Button
-                onClick={handleLogout}
-                variant="outline"
-                size="sm"
-                className="w-full"
-              >
-                <LogOut className="mr-2 h-4 w-4" />
-                Logout
-              </Button>
-            </>
-          )}
-
-          {user && isAuthor && (
-            <>
-              <p className="text-xs text-primary font-mono">
-                ✓ Logged in as blog owner
-              </p>
-              <Button
-                onClick={handleLogout}
-                variant="outline"
-                size="sm"
-                className="w-full"
-              >
-                <LogOut className="mr-2 h-4 w-4" />
-                Logout
-              </Button>
-            </>
-          )}
-
-          {error && (
-            <Alert variant="destructive">
-              <AlertCircle className="h-4 w-4" />
-              <AlertDescription className="text-xs">
-                {error}
-              </AlertDescription>
-            </Alert>
-          )}
+      {user && !isAuthor && (
+        <div className="space-y-1">
+          <p className="text-xs text-destructive font-mono">
+            Access denied
+          </p>
+          <button
+            onClick={handleLogout}
+            className="text-xs text-muted-foreground hover:text-primary transition-colors font-mono cursor-pointer"
+          >
+            Logout
+          </button>
         </div>
-      </CardContent>
-    </Card>
+      )}
+
+      {user && isAuthor && (
+        <div className="space-y-1">
+          <p className="text-xs text-primary font-mono">
+            ✓ Logged in
+          </p>
+          <button
+            onClick={handleLogout}
+            className="text-xs text-muted-foreground hover:text-primary transition-colors font-mono cursor-pointer"
+          >
+            Logout
+          </button>
+        </div>
+      )}
+
+      {error && (
+        <p className="text-xs text-destructive">
+          {error}
+        </p>
+      )}
+    </div>
   );
 }

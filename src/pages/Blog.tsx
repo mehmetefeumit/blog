@@ -14,17 +14,18 @@ const Blog = () => {
   const isAuthor = user?.pubkey === AUTHOR_PUBKEY;
 
   useSeoMeta({
-    title: 'Blog',
-    description: 'Long-form essays and in-depth writing',
+    title: 'NIP-23',
+    description: 'Long-form content events with metadata like titles, summaries, and featured images',
   });
 
   return (
     <div className="space-y-8">
       {/* Section Header */}
       <div>
-        <h1 className="text-3xl font-bold mb-2">Blog</h1>
+        <h1 className="text-3xl font-bold mb-2 font-mono text-primary">NIP-23</h1>
         <p className="text-muted-foreground">
-          Long-form articles published as <span className="font-mono text-primary">NIP-23</span> events.
+          Long-form content events with metadata like titles, summaries, and featured images.
+          These articles are stored as replaceable events, meaning I can update them while maintaining the same identifier.
         </p>
       </div>
 

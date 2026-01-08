@@ -14,17 +14,18 @@ const Notes = () => {
   const isAuthor = user?.pubkey === AUTHOR_PUBKEY;
 
   useSeoMeta({
-    title: 'Notes',
-    description: 'Short-form thoughts and updates',
+    title: 'NIP-01',
+    description: 'Basic text note events—the fundamental building block of Nostr',
   });
 
   return (
     <div className="space-y-8">
       {/* Section Header */}
       <div>
-        <h1 className="text-3xl font-bold mb-2">Notes</h1>
+        <h1 className="text-3xl font-bold mb-2 font-mono text-primary">NIP-01</h1>
         <p className="text-muted-foreground">
-          Short-form posts published as <span className="font-mono text-primary">NIP-01</span> events.
+          Basic text note events—the fundamental building block of Nostr.
+          Simple messages with optional tags for mentions, hashtags, and replies.
         </p>
       </div>
 
