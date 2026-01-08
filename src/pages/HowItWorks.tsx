@@ -26,9 +26,9 @@ const HowItWorks = () => {
         <CardContent className="pt-6 pb-6">
           <div className="prose prose-neutral dark:prose-invert max-w-none">
             <div className="space-y-6">
-              <section>
+              <section className="space-y-4">
                 {howItWorksContent.paragraphs.map((paragraph, index) => (
-                  <p key={index} className={`text-foreground/90 leading-relaxed ${index > 0 ? 'mt-4' : ''}`}>
+                  <p key={index} className="text-foreground/90 leading-relaxed">
                     {index === 1 ? (
                       <>
                         When you visit this page, your browser connects to multiple independent relays, and requests all content
@@ -49,6 +49,13 @@ const HowItWorks = () => {
                     )}
                   </p>
                 ))}
+              </section>
+
+              <section className="pt-6">
+                <h3 className="text-xl font-bold mb-3">{howItWorksContent.whyNotSelfHost.heading}</h3>
+                <p className="text-foreground/90 leading-relaxed">
+                  {howItWorksContent.whyNotSelfHost.content}
+                </p>
               </section>
 
               <section className="pt-4 border-t border-border/40">

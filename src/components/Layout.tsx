@@ -7,6 +7,7 @@ import { AuthorLogin } from '@/components/AuthorLogin';
 import { Nip05Badge } from '@/components/Nip05Badge';
 import { NpubBadge } from '@/components/NpubBadge';
 import { RelayBanner } from '@/components/RelayBanner';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 const AUTHOR_NPUB = 'npub17pdf8saz8fflz3dqyst8rhfzav4s922yv0truw85nr02jxyxqr3shkl0gr';
 
@@ -24,6 +25,8 @@ export function Layout({ children }: LayoutProps) {
        author.data?.metadata?.name ||
        genUserName(AUTHOR_PUBKEY));
 
+  const profileImage = author.data?.metadata?.picture;
+
   const isActive = (path: string) => {
     if (path === '/') {
       return location.pathname === '/';
@@ -39,7 +42,16 @@ export function Layout({ children }: LayoutProps) {
       {/* Header */}
       <header className="border-b border-border/40 backdrop-blur-sm bg-background/80 sticky top-0 z-10">
         <div className="container max-w-6xl mx-auto px-4 py-6">
-          <div className="mb-4">
+          <div className="mb-4 flex items-start gap-4">
+            {/* Profile Picture */}
+            <Avatar className="h-20 w-20 border-2 border-primary/20 shrink-0">
+              <AvatarImage src={profileImage} alt={displayName} />
+              <AvatarFallback className="text-xl bg-primary/10 text-primary">
+                {displayName.slice(0, 2).toUpperCase()}
+              </AvatarFallback>
+            </Avatar>
+
+            {/* Identity Info */}
             <div className="space-y-1">
               <h1 className={`text-2xl font-bold tracking-tight ${
                 author.isLoading ? 'text-muted-foreground' : 'text-foreground'
