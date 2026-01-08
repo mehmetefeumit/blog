@@ -83,29 +83,29 @@ export function DiagnosticPanel() {
     return () => clearInterval(interval);
   }, [config.relayMetadata.relays]);
 
-  // Add diagnostic log
-  const addLog = (message: string, type: DiagnosticLog['type'] = 'info') => {
-    const newLog: DiagnosticLog = {
-      id: `${Date.now()}-${Math.random()}`,
-      timestamp: new Date(),
-      message,
-      type,
-    };
-
-    setLogs(prev => [newLog, ...prev].slice(0, 4)); // Keep only 4 most recent
-  };
-
   // Listen to global diagnostic events
   useEffect(() => {
     const handleDiagnostic = (event: CustomEvent) => {
-      console.log('Diagnostic event received:', event.detail);
-      addLog(event.detail.message, event.detail.type || 'info');
+      const newLog: DiagnosticLog = {
+        id: `${Date.now()}-${Math.random()}`,
+        timestamp: new Date(),
+        message: event.detail.message,
+        type: event.detail.type || 'info',
+      };
+
+      setLogs(prev => [newLog, ...prev].slice(0, 4));
     };
 
     window.addEventListener('nostr-diagnostic' as any, handleDiagnostic);
 
     // Add initial log
-    addLog('Panel ready', 'success');
+    const initialLog: DiagnosticLog = {
+      id: `${Date.now()}-${Math.random()}`,
+      timestamp: new Date(),
+      message: 'Panel ready',
+      type: 'success',
+    };
+    setLogs([initialLog]);
 
     return () => {
       window.removeEventListener('nostr-diagnostic' as any, handleDiagnostic);

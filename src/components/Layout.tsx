@@ -33,29 +33,27 @@ export function Layout({ children }: LayoutProps) {
       {/* Header */}
       <header className="border-b border-border/40 backdrop-blur-sm bg-background/80 sticky top-0 z-10">
         <div className="container max-w-6xl mx-auto px-4 py-6">
-          <div className="space-y-4">
-            {/* Title Row */}
-            <div className="flex items-start gap-6">
-              <Link to="/" className="group shrink-0">
-                <div className="space-y-1">
-                  <h1 className={`text-2xl font-bold tracking-tight transition-colors ${
-                    author.isLoading ? 'text-muted-foreground' : 'text-foreground group-hover:text-primary'
-                  }`}>
-                    <span className="font-mono text-primary">/</span>
-                    <span className="ml-1">{displayName}</span>
-                  </h1>
-                  <Nip05Badge nip05="efe@nostrpurple.com" pubkey={AUTHOR_PUBKEY} />
-                </div>
-              </Link>
-
-              {/* Diagnostic Panel */}
-              <div className="flex-1 min-w-0 pt-1">
-                <DiagnosticPanel />
+          <div className="flex items-start justify-between gap-6 mb-4">
+            <Link to="/" className="group shrink-0">
+              <div className="space-y-1">
+                <h1 className={`text-2xl font-bold tracking-tight transition-colors ${
+                  author.isLoading ? 'text-muted-foreground' : 'text-foreground group-hover:text-primary'
+                }`}>
+                  <span className="font-mono text-primary">/</span>
+                  <span className="ml-1">{displayName}</span>
+                </h1>
+                <Nip05Badge nip05="efe@nostrpurple.com" pubkey={AUTHOR_PUBKEY} />
               </div>
-            </div>
+            </Link>
 
-            {/* Navigation */}
-            <nav className="flex gap-1">
+            {/* Diagnostic Panel */}
+            <div className="flex-1 min-w-0 pt-1">
+              <DiagnosticPanel />
+            </div>
+          </div>
+
+          {/* Navigation */}
+          <nav className="flex gap-1">
             <Link
               to="/"
               className={cn(
@@ -123,24 +121,22 @@ export function Layout({ children }: LayoutProps) {
       {/* Footer */}
       <footer className="border-t border-border/40 mt-20">
         <div className="container max-w-6xl mx-auto px-4 py-8">
-          <div className="space-y-4">
-            <div className="flex items-center justify-between gap-8">
-              <div className="flex-1 space-y-2">
-                <p className="text-xs text-muted-foreground">
-                  <a
-                    href="https://creativecommons.org/publicdomain/zero/1.0/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-primary transition-colors"
-                  >
-                    CC0 1.0 Universal
-                  </a>
-                  {' '}— All content on this site is dedicated to the public domain.
-                </p>
-              </div>
-              <div>
-                <AuthorLogin />
-              </div>
+          <div className="flex items-center justify-between gap-8">
+            <div className="flex-1">
+              <p className="text-xs text-muted-foreground">
+                <a
+                  href="https://creativecommons.org/publicdomain/zero/1.0/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-primary transition-colors"
+                >
+                  CC0 1.0 Universal
+                </a>
+                {' '}— All content on this site is dedicated to the public domain.
+              </p>
+            </div>
+            <div>
+              <AuthorLogin />
             </div>
           </div>
         </div>
