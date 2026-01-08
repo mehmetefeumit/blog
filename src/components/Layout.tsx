@@ -14,8 +14,8 @@ export function Layout({ children }: LayoutProps) {
   const location = useLocation();
   const author = useAuthor(AUTHOR_PUBKEY);
 
-  const displayName = author.data?.metadata?.display_name || 
-                      author.data?.metadata?.name || 
+  const displayName = author.data?.metadata?.display_name ||
+                      author.data?.metadata?.name ||
                       genUserName(AUTHOR_PUBKEY);
 
   const isActive = (path: string) => {
@@ -50,7 +50,18 @@ export function Layout({ children }: LayoutProps) {
                   : "text-muted-foreground hover:text-foreground hover:bg-accent"
               )}
             >
-              Home
+              About
+            </Link>
+            <Link
+              to="/blog"
+              className={cn(
+                "px-4 py-2 rounded-md text-sm font-medium transition-colors",
+                isActive('/blog')
+                  ? "bg-primary/10 text-primary"
+                  : "text-muted-foreground hover:text-foreground hover:bg-accent"
+              )}
+            >
+              Blog
             </Link>
             <Link
               to="/notes"
@@ -64,26 +75,15 @@ export function Layout({ children }: LayoutProps) {
               Notes
             </Link>
             <Link
-              to="/articles"
+              to="/cv"
               className={cn(
                 "px-4 py-2 rounded-md text-sm font-medium transition-colors",
-                isActive('/articles')
+                isActive('/cv')
                   ? "bg-primary/10 text-primary"
                   : "text-muted-foreground hover:text-foreground hover:bg-accent"
               )}
             >
-              Articles
-            </Link>
-            <Link
-              to="/about"
-              className={cn(
-                "px-4 py-2 rounded-md text-sm font-medium transition-colors",
-                isActive('/about')
-                  ? "bg-primary/10 text-primary"
-                  : "text-muted-foreground hover:text-foreground hover:bg-accent"
-              )}
-            >
-              About
+              CV
             </Link>
           </nav>
         </div>
@@ -101,7 +101,7 @@ export function Layout({ children }: LayoutProps) {
             <p className="font-mono">
               Powered by <span className="text-primary">Nostr</span>
             </p>
-            <a 
+            <a
               href="https://shakespeare.diy"
               target="_blank"
               rel="noopener noreferrer"

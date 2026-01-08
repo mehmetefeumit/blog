@@ -7,11 +7,11 @@ import { Card, CardContent } from '@/components/ui/card';
 // Your npub converted to hex
 const AUTHOR_PUBKEY = 'f9cc6b4b5a4881e20e7588fd520a630d95a8f147f15c5e8610dc0ff62bb29c30';
 
-const Articles = () => {
+const Blog = () => {
   const { data: articles, isLoading, error } = useArticles(AUTHOR_PUBKEY);
 
   useSeoMeta({
-    title: 'Articles',
+    title: 'Blog',
     description: 'Long-form essays and in-depth writing',
   });
 
@@ -19,7 +19,7 @@ const Articles = () => {
     <div className="space-y-8">
       {/* Section Header */}
       <div>
-        <h1 className="text-3xl font-bold mb-2">Articles</h1>
+        <h1 className="text-3xl font-bold mb-2">Blog</h1>
         <p className="text-muted-foreground">
           Long-form essays and in-depth writing
         </p>
@@ -85,4 +85,4 @@ const Articles = () => {
   );
 };
 
-export default Articles;
+export default Blog;
