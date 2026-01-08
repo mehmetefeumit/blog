@@ -6,6 +6,7 @@ import { CreateArticle } from '@/components/CreateArticle';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Card, CardContent } from '@/components/ui/card';
 import { AUTHOR_PUBKEY } from '@/lib/constants';
+import { pageContent } from '@/content/pages';
 
 const Blog = () => {
   const { user } = useCurrentUser();
@@ -14,18 +15,17 @@ const Blog = () => {
   const isAuthor = user?.pubkey === AUTHOR_PUBKEY;
 
   useSeoMeta({
-    title: 'NIP-23',
-    description: 'Long-form content events with metadata like titles, summaries, and featured images',
+    title: pageContent.blog.title,
+    description: pageContent.blog.subtitle,
   });
 
   return (
     <div className="space-y-8">
       {/* Section Header */}
       <div>
-        <h1 className="text-3xl font-bold mb-2 font-mono text-primary">NIP-23</h1>
+        <h1 className="text-3xl font-bold mb-2 font-mono text-primary">{pageContent.blog.title}</h1>
         <p className="text-muted-foreground">
-          Long-form content events with metadata like titles, summaries, and featured images.
-          These articles are stored as replaceable events, meaning I can update them while maintaining the same identifier.
+          {pageContent.blog.subtitle}
         </p>
       </div>
 

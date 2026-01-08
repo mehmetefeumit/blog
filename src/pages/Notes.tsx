@@ -6,6 +6,7 @@ import { CreateNote } from '@/components/CreateNote';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Card, CardContent } from '@/components/ui/card';
 import { AUTHOR_PUBKEY } from '@/lib/constants';
+import { pageContent } from '@/content/pages';
 
 const Notes = () => {
   const { user } = useCurrentUser();
@@ -14,18 +15,17 @@ const Notes = () => {
   const isAuthor = user?.pubkey === AUTHOR_PUBKEY;
 
   useSeoMeta({
-    title: 'NIP-01',
-    description: 'Basic text note events—the fundamental building block of Nostr',
+    title: pageContent.notes.title,
+    description: pageContent.notes.subtitle,
   });
 
   return (
     <div className="space-y-8">
       {/* Section Header */}
       <div>
-        <h1 className="text-3xl font-bold mb-2 font-mono text-primary">NIP-01</h1>
+        <h1 className="text-3xl font-bold mb-2 font-mono text-primary">{pageContent.notes.title}</h1>
         <p className="text-muted-foreground">
-          Basic text note events—the fundamental building block of Nostr.
-          Simple messages with optional tags for mentions, hashtags, and replies.
+          {pageContent.notes.subtitle}
         </p>
       </div>
 

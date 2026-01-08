@@ -2,11 +2,12 @@ import { useSeoMeta } from '@unhead/react';
 import { Card, CardContent } from '@/components/ui/card';
 import { FileText } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { pageContent } from '@/content/pages';
 
 const CV = () => {
   useSeoMeta({
-    title: 'CV',
-    description: 'Curriculum Vitae',
+    title: pageContent.cv.title,
+    description: pageContent.cv.subtitle,
   });
 
   // Path to CV PDF - you'll upload this to /public/cv.pdf
@@ -16,9 +17,9 @@ const CV = () => {
     <div className="space-y-8">
       {/* Section Header */}
       <div>
-        <h1 className="text-3xl font-bold mb-2">Curriculum Vitae</h1>
+        <h1 className="text-3xl font-bold mb-2">{pageContent.cv.title}</h1>
         <p className="text-muted-foreground">
-          Professional background and experience
+          {pageContent.cv.subtitle}
         </p>
       </div>
 
@@ -53,8 +54,8 @@ const CV = () => {
             {/* Fallback message */}
             <p className="text-sm text-muted-foreground text-center">
               If the PDF doesn't display, you can{' '}
-              <a 
-                href={cvPath} 
+              <a
+                href={cvPath}
                 download="CV.pdf"
                 className="text-primary hover:underline"
               >

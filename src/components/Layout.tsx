@@ -14,9 +14,11 @@ export function Layout({ children }: LayoutProps) {
   const location = useLocation();
   const author = useAuthor(AUTHOR_PUBKEY);
 
-  const displayName = author.data?.metadata?.display_name ||
-                      author.data?.metadata?.name ||
-                      genUserName(AUTHOR_PUBKEY);
+  const displayName = author.isLoading
+    ? 'loading...'
+    : (author.data?.metadata?.display_name ||
+       author.data?.metadata?.name ||
+       genUserName(AUTHOR_PUBKEY));
 
   const isActive = (path: string) => {
     if (path === '/') {
@@ -33,7 +35,9 @@ export function Layout({ children }: LayoutProps) {
           <div className="flex items-center justify-between mb-6">
             <Link to="/" className="group">
               <div className="space-y-1">
-                <h1 className="text-2xl font-bold tracking-tight text-foreground group-hover:text-primary transition-colors">
+                <h1 className={`text-2xl font-bold tracking-tight transition-colors ${
+                  author.isLoading ? 'text-muted-foreground' : 'text-foreground group-hover:text-primary'
+                }`}>
                   <span className="font-mono text-primary">/</span>
                   <span className="ml-1">{displayName}</span>
                 </h1>
@@ -64,7 +68,7 @@ export function Layout({ children }: LayoutProps) {
                   : "text-muted-foreground hover:text-foreground hover:bg-accent"
               )}
             >
-              NIP-23
+              NIP-23s
             </Link>
             <Link
               to="/notes"
@@ -75,7 +79,18 @@ export function Layout({ children }: LayoutProps) {
                   : "text-muted-foreground hover:text-foreground hover:bg-accent"
               )}
             >
-              NIP-01
+              NIP-01s
+            </Link>
+            <Link
+              to="/how-it-works"
+              className={cn(
+                "px-4 py-2 rounded-md text-sm font-medium transition-colors",
+                isActive('/how-it-works')
+                  ? "bg-primary/10 text-primary"
+                  : "text-muted-foreground hover:text-foreground hover:bg-accent"
+              )}
+            >
+              How It Works
             </Link>
             <Link
               to="/cv"
@@ -103,9 +118,6 @@ export function Layout({ children }: LayoutProps) {
           <div className="space-y-4">
             <div className="flex items-center justify-between gap-8">
               <div className="flex-1 space-y-2">
-                <p className="text-xs text-muted-foreground font-mono">
-                  Powered by <span className="text-primary">Nostr</span>
-                </p>
                 <p className="text-xs text-muted-foreground">
                   <a
                     href="https://creativecommons.org/publicdomain/zero/1.0/"
