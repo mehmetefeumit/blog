@@ -79,32 +79,22 @@ export function RelayBanner() {
         <div className="flex items-center justify-center gap-3 text-xs">
           <Wifi className="h-3 w-3 text-muted-foreground" />
           <div className="flex items-center gap-2">
-            {relayStatuses.map((relay, index) => {
-              const relayName = relay.url.replace('wss://', '').replace(/\/$/, '');
-
-              return (
-                <div key={relay.url} className="flex items-center gap-1.5">
-                  <a
-                    href={`https://njump.me/r/${relayName}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-muted-foreground hover:text-primary transition-colors"
-                    title={`View ${relayName} on njump.me`}
-                  >
-                    <code>{relayName}</code>
-                  </a>
-                  <span className={`font-mono ${
-                    relay.status === 'connected' ? 'text-primary' : 'text-destructive'
-                  }`}>
-                    {relay.latency !== null ? `${relay.latency}ms` :
-                     relay.status === 'connecting' ? '...' : 'x'}
-                  </span>
-                  {index < relayStatuses.length - 1 && (
-                    <span className="text-muted-foreground/30 mx-2">|</span>
-                  )}
-                </div>
-              );
-            })}
+            {relayStatuses.map((relay, index) => (
+              <div key={relay.url} className="flex items-center gap-1.5">
+                <code className="text-muted-foreground">
+                  {relay.url.replace('wss://', '').replace(/\/$/, '')}
+                </code>
+                <span className={`font-mono ${
+                  relay.status === 'connected' ? 'text-primary' : 'text-destructive'
+                }`}>
+                  {relay.latency !== null ? `${relay.latency}ms` :
+                   relay.status === 'connecting' ? '...' : 'x'}
+                </span>
+                {index < relayStatuses.length - 1 && (
+                  <span className="text-muted-foreground/30 mx-2">|</span>
+                )}
+              </div>
+            ))}
           </div>
         </div>
       </div>
