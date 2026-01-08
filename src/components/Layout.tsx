@@ -6,6 +6,7 @@ import { AUTHOR_PUBKEY } from '@/lib/constants';
 import { AuthorLogin } from '@/components/AuthorLogin';
 import { Nip05Badge } from '@/components/Nip05Badge';
 import { DiagnosticPanel } from '@/components/DiagnosticPanel';
+import { RelayBanner } from '@/components/RelayBanner';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -30,10 +31,13 @@ export function Layout({ children }: LayoutProps) {
 
   return (
     <div className="min-h-screen bg-background">
+      {/* Relay Status Banner */}
+      <RelayBanner />
+
       {/* Header */}
       <header className="border-b border-border/40 backdrop-blur-sm bg-background/80 sticky top-0 z-10">
         <div className="container max-w-6xl mx-auto px-4 py-6">
-          <div className="flex items-start justify-between gap-12 mb-4">
+          <div className="flex items-start justify-between gap-16 mb-4">
             <Link to="/" className="group shrink-0">
               <div className="space-y-1">
                 <h1 className={`text-2xl font-bold tracking-tight transition-colors ${

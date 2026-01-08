@@ -1,6 +1,4 @@
 import { useState, useEffect } from 'react';
-import { useAppContext } from '@/hooks/useAppContext';
-import { Wifi } from 'lucide-react';
 
 interface DiagnosticLog {
   id: string;
@@ -9,79 +7,10 @@ interface DiagnosticLog {
   type: 'info' | 'success' | 'error';
 }
 
-interface RelayStatus {
-  url: string;
-  latency: number | null;
-  status: 'connected' | 'connecting' | 'error';
-}
-
 const AUTHOR_NPUB = 'npub17pdf8saz8fflz3dqyst8rhfzav4s922yv0truw85nr02jxyxqr3shkl0gr';
 
 export function DiagnosticPanel() {
-  const { config } = useAppContext();
   const [logs, setLogs] = useState<DiagnosticLog[]>([]);
-  const [relayStatuses, setRelayStatuses] = useState<RelayStatus[]>([]);
-
-  // Initialize relay statuses
-  useEffect(() => {
-    const initialStatuses = config.relayMetadata.relays.map(relay => ({
-      url: relay.url,
-      latency: null,
-      status: 'connecting' as const,
-    }));
-    setRelayStatuses(initialStatuses);
-  }, [config.relayMetadata.relays]);
-
-  // Measure relay latency every 5 seconds
-  useEffect(() => {
-    const measureLatency = async () => {
-      const newStatuses = await Promise.all(
-        config.relayMetadata.relays.map(async (relay) => {
-          try {
-            const startTime = performance.now();
-            const ws = new WebSocket(relay.url);
-
-            await new Promise<void>((resolve, reject) => {
-              const timeout = setTimeout(() => {
-                ws.close();
-                reject(new Error('Timeout'));
-              }, 3000);
-
-              ws.onopen = () => {
-                clearTimeout(timeout);
-                ws.close();
-                resolve();
-              };
-
-              ws.onerror = () => {
-                clearTimeout(timeout);
-                reject(new Error('Connection failed'));
-              };
-            });
-
-            const latency = Math.round(performance.now() - startTime);
-            return {
-              url: relay.url,
-              latency,
-              status: 'connected' as const,
-            };
-          } catch (error) {
-            return {
-              url: relay.url,
-              latency: null,
-              status: 'error' as const,
-            };
-          }
-        })
-      );
-      setRelayStatuses(newStatuses);
-    };
-
-    measureLatency();
-    const interval = setInterval(measureLatency, 5000);
-
-    return () => clearInterval(interval);
-  }, [config.relayMetadata.relays]);
 
   // Listen to global diagnostic events
   useEffect(() => {
@@ -122,7 +51,7 @@ export function DiagnosticPanel() {
   };
 
   return (
-    <div className="flex items-start gap-4 text-xs flex-wrap">
+    <div className="flex items-start gap-8 text-xs flex-wrap">
       {/* Public Key - Full npub with link */}
       <div className="flex items-center gap-1.5">
         <span className="text-muted-foreground text-xs">npub:</span>
@@ -136,30 +65,9 @@ export function DiagnosticPanel() {
         </a>
       </div>
 
-      {/* Relay Status - Horizontal */}
-      <div className="flex items-center gap-2">
-        <Wifi className="h-3 w-3 text-muted-foreground" />
-        {relayStatuses.map((relay, index) => (
-          <div key={relay.url} className="flex items-center gap-1">
-            <code className="text-xs text-muted-foreground">
-              {relay.url.replace('wss://', '').replace(/\/$/, '')}
-            </code>
-            <span className={`text-xs font-mono ${
-              relay.status === 'connected' ? 'text-primary' : 'text-destructive'
-            }`}>
-              {relay.latency !== null ? `${relay.latency}ms` :
-               relay.status === 'connecting' ? '...' : 'x'}
-            </span>
-            {index < relayStatuses.length - 1 && (
-              <span className="text-muted-foreground/30 mx-1">|</span>
-            )}
-          </div>
-        ))}
-      </div>
-
       {/* Activity Logs - Single line with latest */}
       <div className="flex items-center gap-2 min-w-0">
-        <span className="text-muted-foreground text-xs">Nostr Activity:</span>
+        <span className="text-muted-foreground text-xs">Last Nostr Activity:</span>
         {logs.length > 0 ? (
           <div className="flex items-center gap-1.5 min-w-0">
             <span className="text-muted-foreground/70 font-mono text-xs shrink-0">
