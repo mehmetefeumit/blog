@@ -51,7 +51,7 @@ export function DiagnosticPanel() {
   };
 
   return (
-    <div className="flex items-start gap-8 text-xs flex-wrap">
+    <div className="space-y-1.5 text-xs">
       {/* Public Key - Full npub with link */}
       <div className="flex items-center gap-1.5">
         <span className="text-muted-foreground text-xs">npub:</span>
