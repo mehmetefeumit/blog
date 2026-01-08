@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils';
 import { AUTHOR_PUBKEY } from '@/lib/constants';
 import { AuthorLogin } from '@/components/AuthorLogin';
 import { Nip05Badge } from '@/components/Nip05Badge';
+import { DiagnosticPanel } from '@/components/DiagnosticPanel';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -31,8 +32,8 @@ export function Layout({ children }: LayoutProps) {
     <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="border-b border-border/40 backdrop-blur-sm bg-background/80 sticky top-0 z-10">
-        <div className="container max-w-4xl mx-auto px-4 py-6">
-          <div className="flex items-center justify-between mb-6">
+        <div className="container max-w-7xl mx-auto px-4 py-6">
+          <div className="flex items-start justify-between gap-8 mb-6">
             <Link to="/" className="group">
               <div className="space-y-1">
                 <h1 className={`text-2xl font-bold tracking-tight transition-colors ${
@@ -44,6 +45,11 @@ export function Layout({ children }: LayoutProps) {
                 <Nip05Badge nip05="efe@nostrpurple.com" pubkey={AUTHOR_PUBKEY} />
               </div>
             </Link>
+
+            {/* Diagnostic Panel */}
+            <div className="w-80 shrink-0">
+              <DiagnosticPanel />
+            </div>
           </div>
 
           {/* Navigation */}
@@ -108,13 +114,16 @@ export function Layout({ children }: LayoutProps) {
       </header>
 
       {/* Main Content */}
-      <main className="container max-w-4xl mx-auto px-4 py-12">
-        {children}
+      <main className="container max-w-7xl mx-auto px-4 py-12">
+        <div className="max-w-4xl">
+          {children}
+        </div>
       </main>
 
       {/* Footer */}
       <footer className="border-t border-border/40 mt-20">
-        <div className="container max-w-4xl mx-auto px-4 py-8">
+        <div className="container max-w-7xl mx-auto px-4 py-8">
+          <div className="max-w-4xl">
           <div className="space-y-4">
             <div className="flex items-center justify-between gap-8">
               <div className="flex-1 space-y-2">
@@ -134,6 +143,7 @@ export function Layout({ children }: LayoutProps) {
                 <AuthorLogin />
               </div>
             </div>
+          </div>
           </div>
         </div>
       </footer>

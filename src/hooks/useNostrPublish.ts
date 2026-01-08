@@ -1,5 +1,6 @@
 import { useNostr } from "@nostrify/react";
 import { useMutation, type UseMutationResult } from "@tanstack/react-query";
+import { emitDiagnostic } from '@/components/DiagnosticPanel';
 
 import { useCurrentUser } from "./useCurrentUser";
 
@@ -19,6 +20,8 @@ export function useNostrPublish(): UseMutationResult<NostrEvent> {
           tags.push(["client", location.hostname]);
         }
 
+        emitDiagnostic(`Publishing kind ${t.kind} event...`, 'info');
+
         const event = await user.signer.signEvent({
           kind: t.kind,
           content: t.content ?? "",
@@ -27,6 +30,9 @@ export function useNostrPublish(): UseMutationResult<NostrEvent> {
         });
 
         await nostr.event(event, { signal: AbortSignal.timeout(5000) });
+
+        emitDiagnostic(`Published kind ${t.kind} event successfully`, 'success');
+
         return event;
       } else {
         throw new Error("User is not logged in");
@@ -34,6 +40,7 @@ export function useNostrPublish(): UseMutationResult<NostrEvent> {
     },
     onError: (error) => {
       console.error("Failed to publish event:", error);
+      emitDiagnostic(`Failed to publish event: ${error.message}`, 'error');
     },
     onSuccess: (data) => {
       console.log("Event published successfully:", data);
