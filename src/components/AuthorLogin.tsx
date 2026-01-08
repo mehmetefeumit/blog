@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useCurrentUser } from '@/hooks/useCurrentUser';
 import { useLoginActions } from '@/hooks/useLoginActions';
 import { Button } from '@/components/ui/button';
@@ -9,36 +9,36 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 
 export function AuthorLogin() {
   const { user } = useCurrentUser();
-  const { loginNip07, logout } = useLoginActions();
+  const loginActions = useLoginActions();
   const [error, setError] = useState<string | null>(null);
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
 
   const isAuthor = user?.pubkey === AUTHOR_PUBKEY;
 
+  // Check if logged-in user is the author
+  useEffect(() => {
+    if (user && user.pubkey !== AUTHOR_PUBKEY) {
+      setError('Access denied: This login is only for the blog owner.');
+      loginActions.logout();
+    }
+  }, [user, loginActions]);
+
   const handleLogin = async () => {
     setError(null);
-    
+    setIsLoggingIn(true);
+
     try {
-      await loginNip07();
-      
-      // Check if the logged-in user matches the author pubkey
-      // We need to wait a bit for the user state to update
-      setTimeout(() => {
-        const currentUser = localStorage.getItem('nostr:login');
-        if (currentUser) {
-          const userData = JSON.parse(currentUser);
-          if (userData.pubkey !== AUTHOR_PUBKEY) {
-            setError('Access denied: This login is only for the blog owner.');
-            logout();
-          }
-        }
-      }, 500);
+      await loginActions.extension();
     } catch (err) {
-      setError('Failed to connect to Nostr extension. Please make sure you have a Nostr extension installed.');
+      console.error('Login error:', err);
+      setError('Failed to connect to Nostr extension. Please make sure you have a Nostr extension installed (Alby, nos2x, etc.).');
+    } finally {
+      setIsLoggingIn(false);
     }
   };
 
   const handleLogout = () => {
-    logout();
+    loginActions.logout();
     setError(null);
   };
 
@@ -51,14 +51,15 @@ export function AuthorLogin() {
               <p className="text-xs text-muted-foreground font-mono">
                 Author login (blog owner only)
               </p>
-              <Button 
+              <Button
                 onClick={handleLogin}
                 variant="outline"
                 size="sm"
                 className="w-full"
+                disabled={isLoggingIn}
               >
                 <LogIn className="mr-2 h-4 w-4" />
-                Login with Nostr Extension
+                {isLoggingIn ? 'Connecting...' : 'Login with Nostr Extension'}
               </Button>
             </>
           )}
@@ -71,7 +72,7 @@ export function AuthorLogin() {
                   Access denied: This login is only for the blog owner.
                 </AlertDescription>
               </Alert>
-              <Button 
+              <Button
                 onClick={handleLogout}
                 variant="outline"
                 size="sm"
@@ -88,7 +89,7 @@ export function AuthorLogin() {
               <p className="text-xs text-primary font-mono">
                 ✓ Logged in as blog owner
               </p>
-              <Button 
+              <Button
                 onClick={handleLogout}
                 variant="outline"
                 size="sm"
