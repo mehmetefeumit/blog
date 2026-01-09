@@ -10,7 +10,7 @@ export const howItWorksContent = {
   paragraphs: [
     `All blog posts and other writings which you will see on this page are published to a distributed collection
 of relays using the Nostr protocol. Unlike alternatives like Substack or Bear Blog, which store writings in
-centralized servers where they can be tampered with or deleted, Nostr guarantees that (1) all content which
+centralized servers where they can (technically) be tampered with or deleted, Nostr guarantees that (1) all content which
 is under my "name" (public key) has been signed by my private key which only I have access to, and (2) the
 content is hosted on decentralized relays independently of this browser client, and can be read through any other Nostr client which supports NIP-23 events.`,
 
