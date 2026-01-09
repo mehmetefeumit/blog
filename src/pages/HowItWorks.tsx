@@ -6,17 +6,13 @@ import { howItWorksContent } from '@/content/howItWorks';
 const HowItWorks = () => {
   useSeoMeta({
     title: pageContent.howItWorks.title,
-    description: pageContent.howItWorks.subtitle,
   });
 
   return (
     <div className="space-y-8">
       {/* Section Header */}
       <div>
-        <h1 className="text-3xl font-bold mb-2">{pageContent.howItWorks.title}</h1>
-        <p className="text-muted-foreground">
-          {pageContent.howItWorks.subtitle}
-        </p>
+        <h1 className="text-3xl font-bold mb-4">{pageContent.howItWorks.title}</h1>
       </div>
 
       <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent" />
