@@ -26,26 +26,8 @@ const About = () => {
       {/* Content */}
       <Card className="border-border/40 bg-card/50 backdrop-blur-sm">
         <CardContent className="pt-6 pb-6">
-          <div className="prose prose-neutral dark:prose-invert max-w-none">
-            <div className="space-y-6">
-              {aboutContent.sections.map((section, index) => (
-                <section key={index}>
-                  {section.heading && <h2 className="text-2xl font-bold mb-4">{section.heading}</h2>}
-                  <p className="text-foreground/90 leading-relaxed">
-                    {section.content}
-                  </p>
-                </section>
-              ))}
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Footer Disclaimer */}
-      <Card className="border-border/40 bg-card/30 backdrop-blur-sm">
-        <CardContent className="pt-6 pb-6">
-          <div className="space-y-3 text-sm text-muted-foreground">
-            {aboutContent.footer.paragraphs.map((para, index) => {
+          <div className="space-y-4 text-foreground/90 leading-relaxed">
+            {aboutContent.paragraphs.map((para, index) => {
               // Parse NIP-23 and NIP-01
               let text = para.text
                 .replace(/\(NIP-23\)/g, '(<span class="font-mono text-primary">NIP-23</span>)')
@@ -53,14 +35,12 @@ const About = () => {
 
               // Handle How It Works link
               if (para.links.howItWorks) {
-                const howItWorksLink = `<a href="${para.links.howItWorks}" class="text-primary hover:underline">How It Works</a>`;
-                text = text.replace('{howItWorks}', howItWorksLink);
+                text = text.replace('{howItWorks}', `<a href="${para.links.howItWorks}" class="text-primary hover:underline">How It Works</a>`);
               }
 
               // Handle Shakespeare link
               if (para.links.shakespeare) {
-                const shakespeareLink = `<a href="${para.links.shakespeare}" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">Shakespeare.diy</a>`;
-                text = text.replace('{shakespeare}', shakespeareLink);
+                text = text.replace('{shakespeare}', `<a href="${para.links.shakespeare}" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">Shakespeare.diy</a>`);
               }
 
               return (
