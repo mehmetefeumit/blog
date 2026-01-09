@@ -23,16 +23,16 @@ essentially making this page a personal blog where the content is not hosted by 
   whyNotSelfHost: {
     heading: "Why not just host everything myself?",
     paragraphs: [
-      `I've always wanted to have a personal page where I could put my ideas, learnings, and thoughts into writing, and share them with friends and family, or just make them available to the world. Over the past 2 years, I've been interested in Nostr and its potential to be the identity protocol of the internet. But in order for Nostr to succeed, the applications and content on it should offer a level of quality that is becoming harder to come by in the modern internet. So that's the primary reason of this Nostr integration in my blog: ensuring that the work I'll put a lot of energy and thought into also enriches the protocol which I support as a building block of the future internet.`,
+      `I've always wanted to have a personal page where I could put my ideas, learnings, and thoughts into writing, and share them with friends and family, or just make them available to the world. Over the past 2 years, I've been interested in Nostr and its potential to be the identity protocol of the internet. But in order for Nostr to succeed, the applications and content on it should offer some amount of humanity, effort, or quality that is becoming harder to come by in the modern internet. So that's the primary reason of this Nostr integration in my blog: ensuring that the work I'll put a lot of energy and thought into also enriches the protocol which I support as a building block of the future internet.`,
 
       `In addition to that, there are other perks:`,
     ],
     bulletPoints: [
-      `If this website goes down for some reason, my posts are still accessible through many other Nostr clients. I do not lose anything.`,
+      `The writings live independently of this web page. If this web page is not accessible for some reason, the writings still will be through the many other Nostr clients since they live on Nostr relays.`,
 
       `All of the content on this website will have been signed by my private key. Anyone can look at the source code or check out my content through other Nostr clients to confirm that. This is in contrast with other hosted solutions like Substack and Bear Blog which, while great products, do not offer the same level of identity confirmation.`,
 
-      `Nostr is interoperable. If you start reading something on this website, you can continue reading it on another client, since my public key is always the same irrespective of what client you are using. So it is more convenient for the reader too.`,
+      `You can use any client which supports NIP-23 events to read the writings you can read here. The content which are under my public key is the same irrespective of what front-end you choose to fetch and read them with.`,
     ],
   },
 
