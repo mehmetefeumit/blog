@@ -12,7 +12,7 @@ export const howItWorksContent = {
 of relays using the Nostr protocol. Unlike alternatives like Substack or Bear Blog, which store writings in
 centralized servers where they can be tampered with or deleted, Nostr guarantees that (1) all content which
 is under my "name" (public key) has been signed by my private key which only I have access to, and (2) the
-hosting of the content is made redundant by publishing to a decentralized collection of relays.`,
+content is hosted on decentralized relays independently of this browser client, and can be read through any other Nostr client which supports NIP-23 events.`,
 
     `When you visit this page, your browser connects to multiple independent relays, and requests all content
 under my public key. In contrast to standard clients like Primal, it will only display content under my public key,

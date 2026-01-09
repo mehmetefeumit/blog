@@ -8,7 +8,7 @@
 export const pageContent = {
   blog: {
     title: "Writings",
-    subtitle: "Long-form content (i.e. articles, blog posts).",
+    subtitle: "NIP-23 events (i.e. articles, blog posts)",
   },
 
   howItWorks: {
