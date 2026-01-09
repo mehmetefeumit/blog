@@ -114,7 +114,7 @@ export function Layout({ children }: LayoutProps) {
       <footer className="border-t border-border/40 mt-20">
         <div className="container max-w-6xl mx-auto px-4 py-8">
           <div className="flex items-center justify-between gap-8">
-            <div className="flex-1 space-y-1">
+            <div className="flex-1">
               <p className="text-xs text-muted-foreground">
                 <a
                   href="https://creativecommons.org/publicdomain/zero/1.0/"
@@ -125,9 +125,6 @@ export function Layout({ children }: LayoutProps) {
                   CC0 1.0 Universal
                 </a>
                 {' '}— All content signed with the private key corresponding to my public key is released into the public domain.
-              </p>
-              <p className="text-xs text-muted-foreground font-mono break-all">
-                Signature: [To be added - see instructions below]
               </p>
             </div>
             <div>
