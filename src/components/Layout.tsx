@@ -113,8 +113,8 @@ export function Layout({ children }: LayoutProps) {
       {/* Footer */}
       <footer className="border-t border-border/40 mt-20">
         <div className="container max-w-6xl mx-auto px-4 py-8">
-          <div className="flex items-center justify-between gap-8">
-            <div className="flex-1">
+          <div className="grid grid-cols-3 gap-8 items-center">
+            <div>
               <p className="text-xs text-muted-foreground">
                 <a
                   href="https://creativecommons.org/publicdomain/zero/1.0/"
@@ -127,7 +127,7 @@ export function Layout({ children }: LayoutProps) {
                 {' '}— All content signed with the private key corresponding to my public key is released into the public domain.
               </p>
             </div>
-            <div className="text-xs text-muted-foreground">
+            <div className="text-xs text-muted-foreground text-center">
               Built with{' '}
               <a
                 href="https://shakespeare.diy"
@@ -138,7 +138,7 @@ export function Layout({ children }: LayoutProps) {
                 Shakespeare
               </a>
             </div>
-            <div>
+            <div className="flex justify-end">
               <AuthorLogin />
             </div>
           </div>
