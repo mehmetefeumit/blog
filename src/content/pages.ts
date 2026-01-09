@@ -7,7 +7,7 @@
 
 export const pageContent = {
   blog: {
-    title: "Articles",
+    title: "Writings",
     subtitle: "Long-form content (i.e. articles, blog posts).",
   },
 

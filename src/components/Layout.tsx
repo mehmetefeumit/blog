@@ -77,18 +77,7 @@ export function Layout({ children }: LayoutProps) {
                   : "text-muted-foreground hover:text-foreground hover:bg-accent"
               )}
             >
-              About
-            </Link>
-            <Link
-              to="/blog"
-              className={cn(
-                "px-4 py-2 rounded-md text-sm font-medium transition-colors",
-                isActive('/blog')
-                  ? "bg-primary/10 text-primary"
-                  : "text-muted-foreground hover:text-foreground hover:bg-accent"
-              )}
-            >
-              Articles
+              Writings
             </Link>
             <Link
               to="/how-it-works"

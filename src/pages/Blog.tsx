@@ -15,7 +15,7 @@ const Blog = () => {
   const isAuthor = user?.pubkey === AUTHOR_PUBKEY;
 
   useSeoMeta({
-    title: pageContent.blog.title,
+    title: `${pageContent.blog.title} - Efe`,
     description: pageContent.blog.subtitle,
   });
 

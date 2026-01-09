@@ -2,7 +2,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ScrollToTop } from "./components/ScrollToTop";
 import { Layout } from "./components/Layout";
 
-import About from "./pages/About";
 import Blog from "./pages/Blog";
 import HowItWorks from "./pages/HowItWorks";
 import CV from "./pages/CV";
@@ -14,8 +13,7 @@ export function AppRouter() {
     <BrowserRouter>
       <ScrollToTop />
       <Routes>
-        <Route path="/" element={<Layout><About /></Layout>} />
-        <Route path="/blog" element={<Layout><Blog /></Layout>} />
+        <Route path="/" element={<Layout><Blog /></Layout>} />
         <Route path="/how-it-works" element={<Layout><HowItWorks /></Layout>} />
         <Route path="/cv" element={<Layout><CV /></Layout>} />
         {/* NIP-19 route for npub1, note1, naddr1, nevent1, nprofile1 */}
