@@ -127,6 +127,17 @@ export function Layout({ children }: LayoutProps) {
                 {' '}— All content signed with the private key corresponding to my public key is released into the public domain.
               </p>
             </div>
+            <div className="text-xs text-muted-foreground">
+              Built with{' '}
+              <a
+                href="https://shakespeare.diy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary hover:underline"
+              >
+                Shakespeare
+              </a>
+            </div>
             <div>
               <AuthorLogin />
             </div>

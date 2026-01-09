@@ -66,20 +66,7 @@ const HowItWorks = () => {
                 </div>
               </section>
 
-              <section className="pt-4 border-t border-border/40">
-                <p className="text-sm text-muted-foreground italic">
-                  This website is built with{' '}
-                  <a
-                    href={howItWorksContent.attribution.shakespeareLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-primary hover:underline font-medium"
-                  >
-                    Shakespeare
-                  </a>
-                  , an AI-powered development tool, and uses the Nostr protocol for content distribution.
-                </p>
-              </section>
+
             </div>
           </div>
         </CardContent>

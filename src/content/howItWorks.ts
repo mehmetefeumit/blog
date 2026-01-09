@@ -38,10 +38,4 @@ essentially making this page a personal blog where the content is not hosted by 
 
   // Link to Primal (or change to another client)
   primalLink: "https://primal.net/home",
-
-  // Attribution footer
-  attribution: {
-    text: "This website is built with Shakespeare, an AI-powered development tool, and uses the Nostr protocol for content distribution.",
-    shakespeareLink: "https://shakespeare.diy",
-  },
 };
