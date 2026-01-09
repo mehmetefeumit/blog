@@ -28,10 +28,9 @@ const About = () => {
         <CardContent className="pt-6 pb-6">
           <div className="space-y-4 text-foreground/90 leading-relaxed">
             {aboutContent.paragraphs.map((para, index) => {
-              // Parse NIP-23 and NIP-01
+              // Parse NIP-23
               let text = para.text
-                .replace(/\(NIP-23\)/g, '(<span class="font-mono text-primary">NIP-23</span>)')
-                .replace(/\(NIP-01\)/g, '(<span class="font-mono text-primary">NIP-01</span>)');
+                .replace(/\(NIP-23\)/g, '(<span class="font-mono text-primary">NIP-23</span>)');
 
               // Handle How It Works link
               if (para.links.howItWorks) {

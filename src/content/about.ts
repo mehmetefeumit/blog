@@ -13,7 +13,7 @@ export const aboutContent = {
   // Main content - this is the only content on the page
   paragraphs: [
     {
-      text: "This is a Nostr client running on your browser which only displays the long-form (NIP-23) and short-form (NIP-01) content I've authored and published on Nostr. See {howItWorks} for an explanation of how this page is interacting using Nostr to fetch my writings, and why I chose to build it this way.",
+      text: "This is a Nostr client running on your browser which only displays the long-form (NIP-23) content I've authored and published on Nostr. See {howItWorks} for an explanation of how this page is interacting using Nostr to fetch my writings, and why I chose to build it this way.",
       links: {
         howItWorks: "/how-it-works",
       },

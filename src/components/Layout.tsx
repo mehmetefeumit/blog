@@ -82,24 +82,13 @@ export function Layout({ children }: LayoutProps) {
             <Link
               to="/blog"
               className={cn(
-                "px-4 py-2 rounded-md text-sm font-medium font-mono transition-colors",
+                "px-4 py-2 rounded-md text-sm font-medium transition-colors",
                 isActive('/blog')
                   ? "bg-primary/10 text-primary"
                   : "text-muted-foreground hover:text-foreground hover:bg-accent"
               )}
             >
-              NIP-23s
-            </Link>
-            <Link
-              to="/notes"
-              className={cn(
-                "px-4 py-2 rounded-md text-sm font-medium font-mono transition-colors",
-                isActive('/notes')
-                  ? "bg-primary/10 text-primary"
-                  : "text-muted-foreground hover:text-foreground hover:bg-accent"
-              )}
-            >
-              NIP-01s
+              Articles
             </Link>
             <Link
               to="/how-it-works"

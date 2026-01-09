@@ -7,13 +7,8 @@
 
 export const pageContent = {
   blog: {
-    title: "NIP-23s",
+    title: "Articles",
     subtitle: "Long-form content (i.e. articles, blog posts).",
-  },
-
-  notes: {
-    title: "NIP-01s",
-    subtitle: "Short-form, tweet-like posts. I do not post, so chances are, this section will always be empty.",
   },
 
   howItWorks: {
