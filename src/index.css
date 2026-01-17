@@ -126,4 +126,10 @@
   article.article-content p:last-child {
     margin-bottom: 0;
   }
+
+  /* Horizontal rule spacing */
+  article.article-content hr {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
 }
