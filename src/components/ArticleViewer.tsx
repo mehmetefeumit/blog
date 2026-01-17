@@ -100,10 +100,10 @@ export function ArticleViewer({ kind, pubkey, identifier }: ArticleViewerProps) 
             <time className="text-xs font-mono text-muted-foreground tracking-wider uppercase">
               {formattedDate}
             </time>
-            <h1 className="text-4xl font-bold text-foreground">
+            <h1 className="text-4xl font-bold text-foreground break-words">
               {title}
             </h1>
-            <p className="text-xs font-mono text-primary">
+            <p className="text-xs font-mono text-primary break-all">
               {event.id}
             </p>
             {summary && (

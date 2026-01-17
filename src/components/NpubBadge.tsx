@@ -14,7 +14,7 @@ export function NpubBadge({ npub }: NpubBadgeProps) {
       title="View on njump.me"
     >
       <Key className="h-3 w-3 shrink-0" />
-      <span className="font-mono">{npub}</span>
+      <span className="font-mono break-all">{npub}</span>
     </a>
   );
 }

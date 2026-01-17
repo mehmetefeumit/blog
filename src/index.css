@@ -142,4 +142,10 @@
   article.article-content a:hover {
     text-decoration: underline;
   }
+
+  /* Ensure long monospace strings wrap on mobile */
+  .font-mono {
+    word-break: break-all;
+    overflow-wrap: break-word;
+  }
 }
