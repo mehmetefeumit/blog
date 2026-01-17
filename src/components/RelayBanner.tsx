@@ -84,7 +84,7 @@ export function RelayBanner() {
                 <code className="text-muted-foreground">
                   {relay.url.replace('wss://', '').replace(/\/$/, '')}
                 </code>
-                <span className={`font-mono ${
+                <span className={`font-mono whitespace-nowrap ${
                   relay.status === 'connected' ? 'text-primary' : 'text-destructive'
                 }`}>
                   {relay.latency !== null ? `${relay.latency}ms` :
