@@ -19,9 +19,9 @@ export function ArticleViewer({ kind, pubkey, identifier }: ArticleViewerProps) 
     queryKey: ['article', pubkey, identifier],
     queryFn: async (c) => {
       const signal = AbortSignal.any([c.signal, AbortSignal.timeout(3000)]);
-      
+
       emitDiagnostic(`Fetching article: ${identifier}`, 'info');
-      
+
       const events = await nostr.query(
         [
           {
@@ -82,7 +82,7 @@ export function ArticleViewer({ kind, pubkey, identifier }: ArticleViewerProps) 
   const image = event.tags.find(([name]) => name === 'image')?.[1];
   const publishedAt = event.tags.find(([name]) => name === 'published_at')?.[1];
 
-  const date = publishedAt 
+  const date = publishedAt
     ? new Date(parseInt(publishedAt) * 1000)
     : new Date(event.created_at * 1000);
 
@@ -110,7 +110,7 @@ export function ArticleViewer({ kind, pubkey, identifier }: ArticleViewerProps) 
             )}
           </div>
         </CardHeader>
-        
+
         {image && (
           <div className="px-6">
             <img
@@ -122,7 +122,7 @@ export function ArticleViewer({ kind, pubkey, identifier }: ArticleViewerProps) 
         )}
 
         <CardContent className="pt-6">
-          <article className="prose prose-neutral dark:prose-invert max-w-none prose-headings:text-foreground prose-p:text-foreground/90 prose-a:text-primary prose-strong:text-foreground prose-code:text-primary">
+          <article className="prose prose-neutral dark:prose-invert max-w-none prose-headings:text-foreground prose-p:text-foreground/90 prose-p:mb-4 prose-a:text-primary prose-strong:text-foreground prose-code:text-primary">
             <ReactMarkdown>{event.content}</ReactMarkdown>
           </article>
         </CardContent>
