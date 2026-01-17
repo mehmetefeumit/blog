@@ -21,7 +21,7 @@ essentially making this page a personal blog where the content is not hosted by 
 
   // Why not self-host section
   whyNotSelfHost: {
-    heading: "Why Not Just Host Everything Myself?",
+    heading: "Why not just host everything myself?",
     paragraphs: [
       `I've always wanted to have a personal page where I could put my ideas, learnings, and thoughts into writing, and share them with friends and family, or just make them available to the world. Over the past 2 years, I've been interested in Nostr and its potential to be the identity protocol of the internet. But in order for Nostr to succeed, the applications and content on it should offer some amount of humanity, effort, or quality that is becoming harder to come by in the modern internet. So that's the primary reason of this Nostr integration in my blog: ensuring that the work I'll put a lot of energy and thought into also enriches the protocol which I support as a building block of the future internet.`,
 

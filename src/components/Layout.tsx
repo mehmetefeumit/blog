@@ -88,7 +88,7 @@ export function Layout({ children }: LayoutProps) {
                   : "text-muted-foreground hover:text-foreground hover:bg-accent"
               )}
             >
-              How It Works
+              How This Page Works
             </Link>
             <Link
               to="/cv"
