@@ -103,6 +103,9 @@ export function ArticleViewer({ kind, pubkey, identifier }: ArticleViewerProps) 
             <h1 className="text-4xl font-bold text-foreground">
               {title}
             </h1>
+            <p className="text-xs font-mono text-primary">
+              {event.id}
+            </p>
             {summary && (
               <p className="text-lg text-muted-foreground">
                 {summary}
