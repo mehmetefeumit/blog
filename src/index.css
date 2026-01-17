@@ -132,4 +132,14 @@
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
   }
+
+  /* Article link styling */
+  article.article-content a {
+    color: hsl(var(--primary));
+    text-decoration: none;
+  }
+
+  article.article-content a:hover {
+    text-decoration: underline;
+  }
 }
