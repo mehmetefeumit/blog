@@ -1,5 +1,7 @@
 import { nip19 } from 'nostr-tools';
 import { useParams } from 'react-router-dom';
+import { Layout } from '@/components/Layout';
+import { ArticleViewer } from '@/components/ArticleViewer';
 import NotFound from './NotFound';
 
 export function NIP19Page() {
@@ -16,27 +18,38 @@ export function NIP19Page() {
     return <NotFound />;
   }
 
-  const { type } = decoded;
+  const { type, data } = decoded;
 
   switch (type) {
     case 'npub':
     case 'nprofile':
-      // AI agent should implement profile view here
-      return <div>Profile placeholder</div>;
+      // Profile view not implemented
+      return <NotFound />;
 
     case 'note':
-      // AI agent should implement note view here
-      return <div>Note placeholder</div>;
+      // Note view not implemented (only NIP-23 supported)
+      return <NotFound />;
 
     case 'nevent':
-      // AI agent should implement event view here
-      return <div>Event placeholder</div>;
+      // Event view not implemented
+      return <NotFound />;
 
     case 'naddr':
-      // AI agent should implement addressable event view here
-      return <div>Addressable event placeholder</div>;
+      // Display NIP-23 article
+      if (typeof data === 'object' && 'kind' in data && 'pubkey' in data && 'identifier' in data) {
+        return (
+          <Layout>
+            <ArticleViewer
+              kind={data.kind}
+              pubkey={data.pubkey}
+              identifier={data.identifier}
+            />
+          </Layout>
+        );
+      }
+      return <NotFound />;
 
     default:
       return <NotFound />;
   }
-} 
+}
