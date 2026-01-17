@@ -12,7 +12,7 @@ export const pageContent = {
   },
 
   howItWorks: {
-    title: "How this page works",
+    title: "How This Page Works",
     subtitle: "",
   },
 
