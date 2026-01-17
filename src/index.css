@@ -117,4 +117,13 @@
       linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
       linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
   }
+
+  /* Article paragraph spacing */
+  article.article-content p {
+    margin-bottom: 1.5rem;
+  }
+
+  article.article-content p:last-child {
+    margin-bottom: 0;
+  }
 }
