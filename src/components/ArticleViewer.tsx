@@ -122,7 +122,7 @@ export function ArticleViewer({ kind, pubkey, identifier }: ArticleViewerProps) 
         )}
 
         <CardContent className="pt-6">
-          <article className="article-content prose prose-neutral dark:prose-invert max-w-none prose-headings:text-foreground prose-p:text-foreground/90 prose-a:text-primary prose-strong:text-foreground prose-code:text-primary prose-hr:border-border/40">
+          <article className="article-content prose prose-neutral dark:prose-invert max-w-none prose-headings:text-foreground prose-p:text-foreground/90 prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-strong:text-foreground prose-code:text-primary prose-hr:border-border/40">
             <ReactMarkdown>{event.content}</ReactMarkdown>
           </article>
         </CardContent>
